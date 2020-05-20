@@ -20,7 +20,7 @@ import java.util.List;
  * modify
  */
 public interface HeadPictureDao {
-    public List<HeadPicture> findBy_userName ( String userName );
+    public List<HeadPicture> findAll ( );
 
     public HeadPicture add ( HeadPicture headPicture );
 
