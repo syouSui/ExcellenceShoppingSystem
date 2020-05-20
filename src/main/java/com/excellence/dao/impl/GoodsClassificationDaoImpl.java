@@ -14,20 +14,21 @@ import java.util.List;
  * @Description TODO
  */
 public class GoodsClassificationDaoImpl implements GoodsClassificationDao {
+
     @Override
     public List<GoodsClassification> findAllGoodsClassification ( ) {
         return null;
     }
     @Override
-    public boolean addGoodsClassification ( GoodsClassification goodsClassification ) {
-        return false;
+    public int addGoodsClassification ( GoodsClassification goodsClassification ) {
+        return 0;
     }
     @Override
-    public boolean removeGoodsClassification ( GoodsClassification goodsClassification ) {
-        return false;
+    public int removeGoodsClassification ( GoodsClassification goodsClassification ) {
+        return 0;
     }
     @Override
-    public boolean modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName ) {
-        return false;
+    public int modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName ) {
+        return 0;
     }
 }

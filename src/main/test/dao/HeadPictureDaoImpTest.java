@@ -15,12 +15,29 @@ import java.util.List;
  * @Description TODO
  */
 public class HeadPictureDaoImpTest {
-    public static void main ( String[] args ) {
-        HeadPictureDao headPictureDao = new HeadPictureDaoImpl();
-        List<HeadPicture> headPictureList = headPictureDao.findAll();
 
-        for ( HeadPicture e : headPictureList ) {
-            System.out.println( e.getPictureAddress() );
-        }
+    static HeadPictureDao headPictureDao = new HeadPictureDaoImpl( );
+    static List<HeadPicture> headPictureList = null;
+
+    public static void show ( ) {
+        headPictureList = headPictureDao.findAll( );
+        for ( HeadPicture e : headPictureList )
+            System.out.println( e.getPictureAddress( ) );
+        System.out.println( );
+    }
+
+    public static void main ( String[] args ) {
+
+        show();
+
+        headPictureDao.add( new HeadPicture( "6" ) );
+        show();
+
+        headPictureDao.modify( new HeadPicture( "6" ), new HeadPicture( "7" ) );
+        show();
+
+        headPictureDao.remove( new HeadPicture( "7" ) );
+        show();
+
     }
 }

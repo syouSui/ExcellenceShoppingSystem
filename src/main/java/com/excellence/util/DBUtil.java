@@ -55,8 +55,7 @@ public class DBUtil {
         try {
             psm = conn.prepareStatement( preparedSql );
             if ( param != null ) {
-                // 给 preparedSql 语句中的问号赋值
-                for ( int i = 0; i < param.length; ++i ) {
+                for ( int i = 0; i < param.length; ++i ) { // 给 preparedSql 语句中的问号赋值
                     psm.setString( i + 1, param[i] );
                 }
             }
@@ -68,12 +67,11 @@ public class DBUtil {
     }
 
     public int executeUpdate ( String preparedSql, String[] param ) {
-        int count = 0; // 更新记录数
+        int count = 0;
         try {
             psm = conn.prepareStatement( preparedSql );
             if ( param != null ) {
-                // 给 preparedSql 语句中的问号赋值
-                for ( int i = 0; i < param.length; ++i ) {
+                for ( int i = 0; i < param.length; ++i ) { // 给 preparedSql 语句中的问号赋值
                     psm.setString( i + 1, param[i] );
                 }
             }

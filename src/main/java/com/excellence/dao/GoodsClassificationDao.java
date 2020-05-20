@@ -22,10 +22,10 @@ import java.util.List;
 public interface GoodsClassificationDao {
     public List<GoodsClassification> findAllGoodsClassification ( );
 
-    public boolean addGoodsClassification ( GoodsClassification goodsClassification );
+    public int addGoodsClassification ( GoodsClassification goodsClassification );
 
-    public boolean removeGoodsClassification ( GoodsClassification goodsClassification );
+    public int removeGoodsClassification ( GoodsClassification goodsClassification );
 
-    public boolean modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName );
+    public int modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName );
 
 }

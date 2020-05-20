@@ -26,10 +26,10 @@ public interface UserDao {
 
     public User findBy_userEmail_userPassword(String userEmail,String userPassword);
 
-    public boolean addUser(User user);
+    public int addUser(User user);
 
-    public boolean removeUser(User user);
+    public int removeUser(User user);
 
-    public boolean modifyUser(User user,String userName);
+    public int modifyUser(User user,String userName);
 
 }

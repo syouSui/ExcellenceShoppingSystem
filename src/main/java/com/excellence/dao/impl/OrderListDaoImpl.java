@@ -14,6 +14,7 @@ import java.util.List;
  * @Description TODO
  */
 public class OrderListDaoImpl implements OrderListDao {
+
     @Override
     public List<OrderList> findBy_userName ( String userName ) {
         return null;
@@ -23,15 +24,15 @@ public class OrderListDaoImpl implements OrderListDao {
         return null;
     }
     @Override
-    public boolean remove ( OrderList orderList ) {
-        return false;
+    public int remove ( OrderList orderList ) {
+        return 0;
     }
     @Override
-    public boolean modify ( OrderList orderList ) {
-        return false;
+    public int modify ( OrderList orderList ) {
+        return 0;
     }
     @Override
-    public boolean modifyOrderStatusByUserName ( String userName ) {
-        return false;
+    public int modifyOrderStatusByUserName ( String userName ) {
+        return 0;
     }
 }

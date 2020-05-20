@@ -20,8 +20,8 @@ import java.util.List;
 public class HeadPictureDaoImpl extends DBUtil implements HeadPictureDao {
     private String FIND = "select * from head_picture;";
     private String ADD = "insert into head_picture values(?);";
-    private String REMOVE = "delete from head_picture where headPicture=?;";
-    private String MODIFY = "update head_picture set headPicture=?;";
+    private String REMOVE = "delete from head_picture where pictureAddress=?;";
+    private String MODIFY = "update head_picture set pictureAddress=? where pictureAddress=?;";
 
     @Override
     public List<HeadPicture> findAll ( ) {
@@ -36,21 +36,43 @@ public class HeadPictureDaoImpl extends DBUtil implements HeadPictureDao {
                 ) );
             }
         } catch ( SQLException e ) {
-            e.printStackTrace();
+            e.printStackTrace( );
         }
-        super.closeAll();
+        super.closeAll( );
         return list;
     }
     @Override
-    public HeadPicture add ( HeadPicture headPicture ) {
-        return null;
+    public int add ( HeadPicture headPicture ) {
+        int count = 0;
+        super.getConnection( );
+        String[] param = new String[] {
+            headPicture.getPictureAddress( )
+        };
+        count = super.executeUpdate( ADD, param );
+        super.closeAll( );
+        return count;
     }
     @Override
-    public boolean remove ( HeadPicture headPicture ) {
-        return false;
+    public int remove ( HeadPicture headPicture ) {
+        int count = 0;
+        super.getConnection( );
+        String[] param = new String[] {
+            headPicture.getPictureAddress( )
+        };
+        count = super.executeUpdate( REMOVE, param );
+        super.closeAll( );
+        return count;
     }
     @Override
-    public boolean modify ( HeadPicture headPicture ) {
-        return false;
+    public int modify ( HeadPicture from, HeadPicture to ) {
+        int count = 0;
+        super.getConnection( );
+        String[] param = new String[] {
+            to.getPictureAddress( ),
+            from.getPictureAddress( )
+        };
+        count = super.executeUpdate( MODIFY, param );
+        super.closeAll( );
+        return count;
     }
 }

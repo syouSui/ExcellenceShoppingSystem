@@ -26,15 +26,15 @@ public class GoodsDaoImpl implements com.excellence.dao.GoodsDao {
         return null;
     }
     @Override
-    public boolean addGoods ( Goods goods ) {
-        return false;
+    public int addGoods ( Goods goods ) {
+        return 0;
     }
     @Override
-    public boolean removeGoods ( Goods goods ) {
-        return false;
+    public int removeGoods ( Goods goods ) {
+        return 0;
     }
     @Override
-    public boolean modifyGoods ( Goods goods, String goodsName ) {
-        return false;
+    public int modifyGoods ( Goods goods, String goodsName ) {
+        return 0;
     }
 }

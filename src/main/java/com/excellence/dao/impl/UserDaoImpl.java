@@ -14,6 +14,7 @@ import java.util.List;
  * @Description TODO
  */
 public class UserDaoImpl implements UserDao {
+
     @Override
     public List<User> findAllUser ( ) {
         return null;
@@ -27,15 +28,15 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
     @Override
-    public boolean addUser ( User user ) {
-        return false;
+    public int addUser ( User user ) {
+        return 0;
     }
     @Override
-    public boolean removeUser ( User user ) {
-        return false;
+    public int removeUser ( User user ) {
+        return 0;
     }
     @Override
-    public boolean modifyUser ( User user, String userName ) {
-        return false;
+    public int modifyUser ( User user, String userName ) {
+        return 0;
     }
 }
