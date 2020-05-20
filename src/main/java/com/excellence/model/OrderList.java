@@ -20,8 +20,9 @@ public class OrderList implements Serializable {
     private String relativeName;
     private String address;
     private String relativePhone;
+    private String orderStatus;
 
-    public OrderList(String orderId, Date orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone) {
+    public OrderList ( String orderId, Date orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone, String orderStatus ) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.userName = userName;
@@ -30,69 +31,78 @@ public class OrderList implements Serializable {
         this.relativeName = relativeName;
         this.address = address;
         this.relativePhone = relativePhone;
+        this.orderStatus = orderStatus;
     }
 
-    public String getOrderId() {
+    public String getOrderId ( ) {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId ( String orderId ) {
         this.orderId = orderId;
     }
 
-    public Date getOrderDate() {
+    public Date getOrderDate ( ) {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate ( Date orderDate ) {
         this.orderDate = orderDate;
     }
 
-    public String getUserName() {
+    public String getUserName ( ) {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName ( String userName ) {
         this.userName = userName;
     }
 
-    public String getGoodsNumber() {
+    public String getGoodsNumber ( ) {
         return goodsNumber;
     }
 
-    public void setGoodsNumber(String goodsNumber) {
+    public void setGoodsNumber ( String goodsNumber ) {
         this.goodsNumber = goodsNumber;
     }
 
-    public int getCounter() {
+    public int getCounter ( ) {
         return counter;
     }
 
-    public void setCounter(int counter) {
+    public void setCounter ( int counter ) {
         this.counter = counter;
     }
 
-    public String getRelativeName() {
+    public String getRelativeName ( ) {
         return relativeName;
     }
 
-    public void setRelativeName(String relativeName) {
+    public void setRelativeName ( String relativeName ) {
         this.relativeName = relativeName;
     }
 
-    public String getAddress() {
+    public String getAddress ( ) {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress ( String address ) {
         this.address = address;
     }
 
-    public String getRelativePhone() {
+    public String getRelativePhone ( ) {
         return relativePhone;
     }
 
-    public void setRelativePhone(String relativePhone) {
+    public void setRelativePhone ( String relativePhone ) {
         this.relativePhone = relativePhone;
+    }
+
+    public String getOrderStatus ( ) {
+        return orderStatus;
+    }
+
+    public void setOrderStatus ( String orderStatus ) {
+        this.orderStatus = orderStatus;
     }
 }
