@@ -43,6 +43,7 @@ public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassific
         super.closeAll( );
         return list;
     }
+
     @Override
     public int addGoodsClassification ( GoodsClassification goodsClassification ) {
         int count = 0;
@@ -55,6 +56,7 @@ public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassific
         super.closeAll( );
         return count;
     }
+
     @Override
     public int[] removeGoodsClassification ( GoodsClassification goodsClassification ) {
         int[] count = new int[] { 0, 0 };
@@ -67,6 +69,7 @@ public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassific
         super.closeAll( );
         return count;
     }
+
     @Override
     public int[] modifyGoodsClassification ( GoodsClassification goodsClassification, String wantGoodsClassification ) {
         int[] count = new int[] { 0, 0 };

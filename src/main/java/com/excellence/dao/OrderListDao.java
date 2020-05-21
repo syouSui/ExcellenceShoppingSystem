@@ -22,11 +22,11 @@ import java.util.List;
 public interface OrderListDao {
     public List<OrderList> findBy_userName( String userName);
 
-    public OrderList add ( OrderList orderList );
+    public int add ( OrderList orderList );
 
     public int remove ( OrderList orderList );
 
     public int modify ( OrderList orderList );
 
-    public int modifyOrderStatusByUserName( String userName );
+    public int modifyOrderStatusBy_userName( String userName );
 }

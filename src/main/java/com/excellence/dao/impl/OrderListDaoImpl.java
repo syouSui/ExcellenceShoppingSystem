@@ -19,8 +19,8 @@ public class OrderListDaoImpl implements OrderListDao {
         return null;
     }
     @Override
-    public OrderList add ( OrderList orderList ) {
-        return null;
+    public int add ( OrderList orderList ) {
+        return 0;
     }
     @Override
     public int remove ( OrderList orderList ) {
@@ -31,7 +31,7 @@ public class OrderListDaoImpl implements OrderListDao {
         return 0;
     }
     @Override
-    public int modifyOrderStatusByUserName ( String userName ) {
+    public int modifyOrderStatusBy_userName ( String userName ) {
         return 0;
     }
 }
