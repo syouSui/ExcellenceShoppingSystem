@@ -24,7 +24,7 @@ public interface ShoppingCartDao {
 
     public ShoppingCart add ( ShoppingCart shoppingCart );
 
-    public boolean remove ( ShoppingCart shoppingCart );
+    public int remove ( ShoppingCart shoppingCart );
 
-    public boolean modify ( ShoppingCart shoppingCart );
+    public int modify ( ShoppingCart shoppingCart );
 }

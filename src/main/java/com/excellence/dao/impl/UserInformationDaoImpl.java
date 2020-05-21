@@ -16,7 +16,6 @@ import java.util.List;
  * @Description TODO
  */
 public class UserInformationDaoImpl implements UserInformationDao {
-
     @Override
     public List<UserInformation> findBy_userName ( String userName ) {
         return null;
@@ -26,11 +25,11 @@ public class UserInformationDaoImpl implements UserInformationDao {
         return null;
     }
     @Override
-    public boolean remove ( UserInformation userInformation ) {
-        return false;
+    public int remove ( UserInformation userInformation ) {
+        return 0;
     }
     @Override
-    public boolean modify ( UserInformation userInformation ) {
-        return false;
+    public int modify ( UserInformation userInformation ) {
+        return 0;
     }
 }

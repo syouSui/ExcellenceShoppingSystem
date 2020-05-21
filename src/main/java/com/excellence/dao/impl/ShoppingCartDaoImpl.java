@@ -14,7 +14,6 @@ import java.util.List;
  * @Description TODO
  */
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
-
     @Override
     public List<ShoppingCart> findBy_userName ( String userName ) {
         return null;
@@ -24,11 +23,11 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         return null;
     }
     @Override
-    public boolean remove ( ShoppingCart shoppingCart ) {
-        return false;
+    public int remove ( ShoppingCart shoppingCart ) {
+        return 0;
     }
     @Override
-    public boolean modify ( ShoppingCart shoppingCart ) {
-        return false;
+    public int modify ( ShoppingCart shoppingCart ) {
+        return 0;
     }
 }
