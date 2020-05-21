@@ -16,63 +16,52 @@ public class User implements Serializable {
     private String userPassword;
     private int role;
     private String phone;
-    private String usrEmail;
+    private String userEmail;
 
-    public User ( String userName,String userNickname, String userPassword, int role, String phone, String usrEmail ) {
+    public User ( ) {
+    }
+    public User ( String userName, String userNickname, String userPassword, int role, String phone, String usrEmail ) {
         this.userName = userName;
         this.userNickname = userNickname;
         this.userPassword = userPassword;
         this.role = role;
         this.phone = phone;
-        this.usrEmail = usrEmail;
+        this.userEmail = usrEmail;
     }
-
     public String getUserName ( ) {
         return userName;
     }
-
     public void setUserName ( String userName ) {
         this.userName = userName;
     }
-
     public String getUserNickname ( ) {
         return userNickname;
     }
-
     public void setUserNickname ( String userNickname ) {
         this.userNickname = userNickname;
     }
-
-    public String getUserPass ( ) {
+    public String getUserPassword ( ) {
         return userPassword;
     }
-
-    public void setUserPass ( String userPassword ) {
+    public void setUserPassword ( String userPassword ) {
         this.userPassword = userPassword;
     }
-
     public int getRole ( ) {
         return role;
     }
-
     public void setRole ( int role ) {
         this.role = role;
     }
-
     public String getPhone ( ) {
         return phone;
     }
-
     public void setPhone ( String phone ) {
         this.phone = phone;
     }
-
-    public String getUsrEmail ( ) {
-        return usrEmail;
+    public String getUserEmail ( ) {
+        return userEmail;
     }
-
-    public void setUsrEmail ( String usrEmail ) {
-        this.usrEmail = usrEmail;
+    public void setUsrEmail ( String userEmail ) {
+        this.userEmail = userEmail;
     }
-
 }
