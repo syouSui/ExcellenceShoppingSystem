@@ -1,7 +1,7 @@
 package com.excellence.dao.impl;
 
-import com.excellence.dao.HeadPictureDao;
-import com.excellence.model.HeadPicture;
+import com.excellence.dao.GoodsClassificationDao;
+import com.excellence.model.GoodsClassification;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -17,13 +17,13 @@ import java.util.List;
  */
 public class GoodsClassificationDaoImplTest {
 
-    static HeadPictureDao headPictureDao = new HeadPictureDaoImpl( );
-    static List<HeadPicture> headPictureList = null;
+    static GoodsClassificationDao goodsClassificationDao = new GoodsClassificationDaoImpl( );
+    static List<GoodsClassification> goodsClassificationList = null;
 
     public static void show ( ) {
-        headPictureList = headPictureDao.findAll( );
-        for ( HeadPicture e : headPictureList )
-            System.out.println( e.getPictureAddress( ) );
+//        goodsClassificationList = goodsClassificationDao.findAll( );
+        for ( GoodsClassification e : goodsClassificationList )
+            System.out.println( );
         System.out.println( );
     }
 
@@ -48,7 +48,6 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testAddGoodsClassification ( ) throws Exception {
-        headPictureDao.add( new HeadPicture( "6" ) );
         show( );
     }
 
@@ -57,7 +56,6 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testRemoveGoodsClassification ( ) throws Exception {
-        headPictureDao.modify( new HeadPicture( "6" ), new HeadPicture( "7" ) );
         show( );
     }
 
@@ -66,9 +64,6 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testModifyGoodsClassification ( ) throws Exception {
-        headPictureDao.remove( new HeadPicture( "7" ) );
         show( );
     }
-
-
-} 
+}
