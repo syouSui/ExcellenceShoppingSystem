@@ -6,6 +6,7 @@ import com.excellence.util.DBUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,22 +28,22 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 
     @Override
     public List<User> findAllUser ( ) {
-        List<User> userList = null;
+        List<User> userList = new ArrayList<>( );
+        super.getConnection( );
         ResultSet resultSet = null;
         String[] param = new String[] { };
-        super.getConnection( );
         resultSet = super.executeQuery( selectSQL, param );
         try {
             while ( resultSet.next( ) ) {
-                User user = new User(
-                        resultSet.getString( "userName" ),
-                        resultSet.getString( "userNickname" ),
-                        resultSet.getString( "userPassword" ),
-                        resultSet.getInt( "role" ),
-                        resultSet.getString( "phone" ),
-                        resultSet.getString( "userEmail" )
+                userList.add( new User(
+                                resultSet.getString( "userName" ),
+                                resultSet.getString( "userNickname" ),
+                                resultSet.getString( "userPassword" ),
+                                resultSet.getInt( "role" ),
+                                resultSet.getString( "phone" ),
+                                resultSet.getString( "userEmail" )
+                        )
                 );
-                userList.add( user );
             }
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
@@ -54,17 +55,20 @@ public class UserDaoImpl extends DBUtil implements UserDao {
     @Override
     public User findBy_userName_userPassword ( String userName, String userPassword ) {
         User user = null;
+        super.getConnection( );
         ResultSet resultSet = null;
         String[] param = new String[] { userName, userPassword };
-        super.getConnection( );
+        String test = selectSQL + select_userName + select_userPassword;
         resultSet = super.executeQuery( selectSQL + select_userName + select_userPassword, param );
         try {
-            user = new User( resultSet.getString( "userName" ),
-                    resultSet.getString( "userNickname" ),
-                    resultSet.getString( "userPassword" ),
-                    resultSet.getInt( "role" ),
-                    resultSet.getString( "phone" ),
-                    resultSet.getString( "userEmail" ) );
+            while ( resultSet.next( ) ) {
+                user = new User( resultSet.getString( "userName" ),
+                        resultSet.getString( "userNickname" ),
+                        resultSet.getString( "userPassword" ),
+                        resultSet.getInt( "role" ),
+                        resultSet.getString( "phone" ),
+                        resultSet.getString( "userEmail" ) );
+            }
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
@@ -75,21 +79,25 @@ public class UserDaoImpl extends DBUtil implements UserDao {
     @Override
     public User findBy_userEmail_userPassword ( String userEmail, String userPassword ) {
         User user = null;
+        super.getConnection( );
         ResultSet resultSet = null;
         String[] param = new String[] { userEmail, userPassword };
-        resultSet = super.executeQuery( selectSQL + select_userEmail + userPassword, param );
-        super.getConnection( );
+        resultSet = super.executeQuery( selectSQL + select_userEmail + select_userPassword, param );
         try {
-            user = new User( resultSet.getString( "userName" ),
-                    resultSet.getString( "userNickname" ),
-                    resultSet.getString( "userPassword" ),
-                    resultSet.getInt( "role" ),
-                    resultSet.getString( "phone" ),
-                    resultSet.getString( "userEmail" ) );
-        } catch ( SQLException throwables ) {
+            while ( resultSet.next( ) ) {
+                user = new User( resultSet.getString( "userName" ),
+                        resultSet.getString( "userNickname" ),
+                        resultSet.getString( "userPassword" ),
+                        resultSet.getInt( "role" ),
+                        resultSet.getString( "phone" ),
+                        resultSet.getString( "userEmail" ) );
+            }
+        } catch (
+                SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeAll( );
+        super.
+                closeAll( );
         return user;
     }
 

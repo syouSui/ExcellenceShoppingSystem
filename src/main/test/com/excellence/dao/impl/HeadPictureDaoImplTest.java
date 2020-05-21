@@ -1,4 +1,4 @@
-package test.com.excellence.dao.impl;
+package com.excellence.dao.impl;
 
 import com.excellence.dao.HeadPictureDao;
 import com.excellence.dao.impl.HeadPictureDaoImpl;
