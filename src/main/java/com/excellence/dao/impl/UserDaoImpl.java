@@ -34,14 +34,15 @@ public class UserDaoImpl extends DBUtil implements UserDao {
         resultSet = super.executeQuery( selectSQL, param );
         try {
             while ( resultSet.next( ) ) {
-                userList.add(
-                        new User( resultSet.getString( "userName" ),
-                                resultSet.getString( "userNickname" ),
-                                resultSet.getString( "userPassword" ),
-                                resultSet.getInt( "role" ),
-                                resultSet.getString( "phone" ),
-                                resultSet.getString( "userEmail" ) )
+                User user = new User(
+                        resultSet.getString( "userName" ),
+                        resultSet.getString( "userNickname" ),
+                        resultSet.getString( "userPassword" ),
+                        resultSet.getInt( "role" ),
+                        resultSet.getString( "phone" ),
+                        resultSet.getString( "userEmail" )
                 );
+                userList.add( user );
             }
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
@@ -49,6 +50,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
         super.closeAll( );
         return userList;
     }
+
     @Override
     public User findBy_userName_userPassword ( String userName, String userPassword ) {
         User user = null;
@@ -69,6 +71,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
         super.closeAll( );
         return user;
     }
+
     @Override
     public User findBy_userEmail_userPassword ( String userEmail, String userPassword ) {
         User user = null;
@@ -89,6 +92,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
         super.closeAll( );
         return user;
     }
+
     @Override
     public int addUser ( User user ) {
         int count = 0;
@@ -105,6 +109,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
         super.closeAll( );
         return count;
     }
+
     @Override
     public int removeUser ( User user ) {
         int count = 0;
@@ -120,6 +125,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
         count = super.executeUpdate( removeSQL, param );
         return count;
     }
+
     @Override
     public int modifyUser ( User user, String userName ) {
         int count = 0;

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * GoodsClassificationDaoImpl Tester.
  *
- * @author <Authors name>
+ * @author acmaker
  * @version 1.0
  * @since <pre>5月 21, 2020</pre>
  */
@@ -21,9 +21,12 @@ public class GoodsClassificationDaoImplTest {
     static List<GoodsClassification> goodsClassificationList = null;
 
     public static void show ( ) {
-//        goodsClassificationList = goodsClassificationDao.findAll( );
+        goodsClassificationList = goodsClassificationDao.findAllGoodsClassification( );
         for ( GoodsClassification e : goodsClassificationList )
-            System.out.println( );
+            System.out.println(
+                    e.getGoodsClassification( ) + "\t" +
+                            e.getClassificationName( )
+            );
         System.out.println( );
     }
 

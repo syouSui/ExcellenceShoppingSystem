@@ -24,7 +24,7 @@ public interface UserInformationDao {
 
 //    public List<UserInformation> findBy_userName_userPassword(String userName);
 
-    public UserInformation add ( UserInformation userInformation );
+    public int add ( UserInformation userInformation );
 
     public int remove ( UserInformation userInformation );
 

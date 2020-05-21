@@ -22,7 +22,7 @@ import java.util.List;
 public interface ShoppingCartDao {
     public List<ShoppingCart> findBy_userName( String userName);
 
-    public ShoppingCart add ( ShoppingCart shoppingCart );
+    public int add ( ShoppingCart shoppingCart );
 
     public int remove ( ShoppingCart shoppingCart );
 

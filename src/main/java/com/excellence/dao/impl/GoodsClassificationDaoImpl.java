@@ -18,7 +18,7 @@ import java.util.List;
  * @Description TODO
  */
 public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassificationDao {
-    private String FIND = "select * from goods_classification where goodsClassification=?;";
+    private String FIND = "select * from goods_classification;";
     private String ADD = "insert into goods_classification values(?,?);";
     private String REMOVE = "delete from goods_classification where goodsClassification=?;";
     private String MODIFY = "update goods_classification set classification=? where classification=?;";

@@ -20,9 +20,9 @@ public class OrderList implements Serializable {
     private String relativeName;
     private String address;
     private String relativePhone;
-    private String orderStatus;
+    private int orderStatus;
 
-    public OrderList ( String orderId, Date orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone, String orderStatus ) {
+    public OrderList ( String orderId, Date orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone, int orderStatus ) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.userName = userName;
@@ -98,11 +98,11 @@ public class OrderList implements Serializable {
         this.relativePhone = relativePhone;
     }
 
-    public String getOrderStatus ( ) {
+    public int getOrderStatus ( ) {
         return orderStatus;
     }
 
-    public void setOrderStatus ( String orderStatus ) {
+    public void setOrderStatus ( int orderStatus ) {
         this.orderStatus = orderStatus;
     }
 }

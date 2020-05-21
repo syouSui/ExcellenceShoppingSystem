@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * HeadPictureDaoImpl Tester.
  *
- * @author <Authors name>
+ * @author acmaker
  * @version 1.0
  * @since <pre>5月 21, 2020</pre>
  */
