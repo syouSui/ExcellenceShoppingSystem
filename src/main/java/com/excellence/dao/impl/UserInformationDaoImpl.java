@@ -1,7 +1,9 @@
 package com.excellence.dao.impl;
 
 import com.excellence.dao.UserDao;
+import com.excellence.dao.UserInformationDao;
 import com.excellence.model.User;
+import com.excellence.model.UserInformation;
 
 import java.util.List;
 
@@ -13,30 +15,22 @@ import java.util.List;
  * @createTime 2020-05-20 18:25:00 星期三
  * @Description TODO
  */
-public class UserInformationDaoImpl implements UserDao {
+public class UserInformationDaoImpl implements UserInformationDao {
 
     @Override
-    public List<User> findAllUser ( ) {
+    public List<UserInformation> findBy_userName ( String userName ) {
         return null;
     }
     @Override
-    public User findBy_userName_userPassword ( String userName, String userPassword ) {
+    public UserInformation add ( UserInformation userInformation ) {
         return null;
     }
     @Override
-    public User findBy_userEmail_userPassword ( String userEmail, String userPassword ) {
-        return null;
+    public boolean remove ( UserInformation userInformation ) {
+        return false;
     }
     @Override
-    public int addUser ( User user ) {
-        return 0;
-    }
-    @Override
-    public int removeUser ( User user ) {
-        return 0;
-    }
-    @Override
-    public int modifyUser ( User user, String userName ) {
-        return 0;
+    public boolean modify ( UserInformation userInformation ) {
+        return false;
     }
 }

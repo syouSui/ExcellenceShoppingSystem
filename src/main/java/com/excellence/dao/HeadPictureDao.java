@@ -22,9 +22,9 @@ import java.util.List;
 public interface HeadPictureDao {
     public List<HeadPicture> findAll ( );
 
-    public int add ( HeadPicture headPicture );
+    public boolean add ( HeadPicture headPicture );
 
-    public int remove ( HeadPicture headPicture );
+    public boolean remove ( HeadPicture headPicture );
 
-    public int modify ( HeadPicture from, HeadPicture to );
+    public boolean modify ( HeadPicture from, HeadPicture to );
 }

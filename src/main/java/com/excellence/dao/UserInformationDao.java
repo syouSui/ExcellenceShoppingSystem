@@ -26,7 +26,7 @@ public interface UserInformationDao {
 
     public UserInformation add ( UserInformation userInformation );
 
-    public int remove ( UserInformation userInformation );
+    public boolean remove ( UserInformation userInformation );
 
-    public int modify ( UserInformation userInformation );
+    public boolean modify ( UserInformation userInformation );
 }

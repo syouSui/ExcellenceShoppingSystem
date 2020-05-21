@@ -24,11 +24,11 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         return null;
     }
     @Override
-    public int remove ( ShoppingCart shoppingCart ) {
-        return 0;
+    public boolean remove ( ShoppingCart shoppingCart ) {
+        return false;
     }
     @Override
-    public int modify ( ShoppingCart shoppingCart ) {
-        return 0;
+    public boolean modify ( ShoppingCart shoppingCart ) {
+        return false;
     }
 }

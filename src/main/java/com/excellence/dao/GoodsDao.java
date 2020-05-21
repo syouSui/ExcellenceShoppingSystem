@@ -25,10 +25,10 @@ public interface GoodsDao {
 
     public List<Goods> findBy_goodsClassification(String goodsClassification );
 
-    public int addGoods ( Goods goods );
+    public boolean addGoods ( Goods goods );
 
-    public int removeGoods ( Goods goods );
+    public boolean removeGoods ( Goods goods );
 
-    public int modifyGoods ( Goods goods, String goodsName );
+    public boolean modifyGoods ( Goods goods, String goodsName );
 
 }

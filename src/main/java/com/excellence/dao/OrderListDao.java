@@ -24,9 +24,9 @@ public interface OrderListDao {
 
     public OrderList add ( OrderList orderList );
 
-    public int remove ( OrderList orderList );
+    public boolean remove ( OrderList orderList );
 
-    public int modify ( OrderList orderList );
+    public boolean modify ( OrderList orderList );
 
-    public int modifyOrderStatusByUserName( String userName );
+    public boolean modifyOrderStatusByUserName( String userName );
 }

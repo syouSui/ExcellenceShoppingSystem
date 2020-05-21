@@ -24,15 +24,15 @@ public class OrderListDaoImpl implements OrderListDao {
         return null;
     }
     @Override
-    public int remove ( OrderList orderList ) {
-        return 0;
+    public boolean remove ( OrderList orderList ) {
+        return false;
     }
     @Override
-    public int modify ( OrderList orderList ) {
-        return 0;
+    public boolean modify ( OrderList orderList ) {
+        return false;
     }
     @Override
-    public int modifyOrderStatusByUserName ( String userName ) {
-        return 0;
+    public boolean modifyOrderStatusByUserName ( String userName ) {
+        return false;
     }
 }

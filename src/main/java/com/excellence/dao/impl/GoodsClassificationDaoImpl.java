@@ -20,15 +20,15 @@ public class GoodsClassificationDaoImpl implements GoodsClassificationDao {
         return null;
     }
     @Override
-    public int addGoodsClassification ( GoodsClassification goodsClassification ) {
-        return 0;
+    public boolean addGoodsClassification ( GoodsClassification goodsClassification ) {
+        return false;
     }
     @Override
-    public int removeGoodsClassification ( GoodsClassification goodsClassification ) {
-        return 0;
+    public boolean removeGoodsClassification ( GoodsClassification goodsClassification ) {
+        return false;
     }
     @Override
-    public int modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName ) {
-        return 0;
+    public boolean modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName ) {
+        return false;
     }
 }

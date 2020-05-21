@@ -42,37 +42,34 @@ public class HeadPictureDaoImpl extends DBUtil implements HeadPictureDao {
         return list;
     }
     @Override
-    public int add ( HeadPicture headPicture ) {
-        int count = 0;
+    public boolean add ( HeadPicture headPicture ) {
         super.getConnection( );
         String[] param = new String[] {
             headPicture.getPictureAddress( )
         };
-        count = super.executeUpdate( ADD, param );
+        int count = super.executeUpdate( ADD, param );
         super.closeAll( );
-        return count;
+        return count==1 ? true : false;
     }
     @Override
     public int remove ( HeadPicture headPicture ) {
-        int count = 0;
         super.getConnection( );
         String[] param = new String[] {
             headPicture.getPictureAddress( )
         };
-        count = super.executeUpdate( REMOVE, param );
+        int count = super.executeUpdate( REMOVE, param );
         super.closeAll( );
-        return count;
+        return count==1 ? true : false;
     }
     @Override
     public int modify ( HeadPicture from, HeadPicture to ) {
-        int count = 0;
         super.getConnection( );
         String[] param = new String[] {
             to.getPictureAddress( ),
             from.getPictureAddress( )
         };
-        count = super.executeUpdate( MODIFY, param );
+        int count = super.executeUpdate( MODIFY, param );
         super.closeAll( );
-        return count;
+        return count==1 ? true : false;
     }
 }
