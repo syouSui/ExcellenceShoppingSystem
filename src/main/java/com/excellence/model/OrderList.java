@@ -1,6 +1,7 @@
 package com.excellence.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /********************************************************************************
@@ -13,7 +14,7 @@ import java.util.Date;
 
 public class OrderList implements Serializable {
     private String orderId;
-    private Date orderDate;
+    private String orderDate;
     private String userName;
     private String goodsNumber;
     private int counter;
@@ -22,7 +23,10 @@ public class OrderList implements Serializable {
     private String relativePhone;
     private int orderStatus;
 
-    public OrderList ( String orderId, Date orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone, int orderStatus ) {
+    public OrderList ( ) {
+    }
+
+    public OrderList ( String orderId, String orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone, int orderStatus ) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.userName = userName;
@@ -42,11 +46,11 @@ public class OrderList implements Serializable {
         this.orderId = orderId;
     }
 
-    public Date getOrderDate ( ) {
+    public String getOrderDate ( ) {
         return orderDate;
     }
 
-    public void setOrderDate ( Date orderDate ) {
+    public void setOrderDate ( String orderDate ) {
         this.orderDate = orderDate;
     }
 
@@ -105,4 +109,12 @@ public class OrderList implements Serializable {
     public void setOrderStatus ( int orderStatus ) {
         this.orderStatus = orderStatus;
     }
+
+    public static String getSystemDateString ( ) {
+        Date date = new Date( );
+        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss" );
+        String strdate = sdf.format( date );
+        return strdate;
+    }
+
 }

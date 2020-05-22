@@ -12,6 +12,9 @@ public class GoodsClassification {
     private String goodsClassification;
     private String classificationName;
 
+    public GoodsClassification ( ) {
+    }
+
     public GoodsClassification(String goodsClassification, String classificationName) {
         this.goodsClassification = goodsClassification;
         this.classificationName = classificationName;

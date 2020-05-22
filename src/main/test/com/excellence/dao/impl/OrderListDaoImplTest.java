@@ -1,8 +1,17 @@
 package com.excellence.dao.impl;
 
+import com.excellence.dao.OrderListDao;
+import com.excellence.dao.UserDao;
+import com.excellence.model.OrderList;
+import com.excellence.model.User;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * OrderListDaoImpl Tester.
@@ -12,6 +21,9 @@ import org.junit.After;
  * @since <pre>5月 21, 2020</pre>
  */
 public class OrderListDaoImplTest {
+
+    static OrderListDaoImpl orderListDao = new OrderListDaoImpl( );
+    static List<OrderList> orderLists = new ArrayList<>( );
 
     @Before
     public void before ( ) throws Exception {
@@ -26,7 +38,14 @@ public class OrderListDaoImplTest {
      */
     @Test
     public void testFindBy_userName ( ) throws Exception {
-//TODO: Test goes here... 
+        orderLists = orderListDao.findBy_userName( "lyx" );
+        for ( OrderList o : orderLists ) {
+            System.out.println(
+                    o.getAddress( ) + "\t" +
+                            o.getRelativeName( ) + "\t" +
+                            o.getOrderDate( )
+            );
+        }
     }
 
     /**
@@ -34,7 +53,19 @@ public class OrderListDaoImplTest {
      */
     @Test
     public void testAdd ( ) throws Exception {
-//TODO: Test goes here... 
+
+        orderListDao.add( new OrderList(
+                "12",
+                OrderList.getSystemDateString(),
+                "lyx",
+                "000988888",
+                66,
+                "lux",
+                "lyx",
+                "12314",
+                1 )
+        );
+
     }
 
     /**
@@ -42,7 +73,17 @@ public class OrderListDaoImplTest {
      */
     @Test
     public void testRemove ( ) throws Exception {
-//TODO: Test goes here... 
+        orderListDao.remove( new OrderList(
+                "12",
+                "2020-05-22 02:18:03",
+                "lyx",
+                "000988888",
+                0,
+                "",
+                "",
+                "",
+                0)
+        );
     }
 
     /**
@@ -50,16 +91,17 @@ public class OrderListDaoImplTest {
      */
     @Test
     public void testModify ( ) throws Exception {
-//TODO: Test goes here... 
+        orderListDao.modify( new OrderList(
+                "12",
+                "2020-05-22 02:36:57",
+                "lyx",
+                "000988888",
+                99,
+                "lyx_test",
+                "wfu",
+                "18888889999",
+                1)
+        );
     }
-
-    /**
-     * Method: modifyOrderStatusByUserName(String userName)
-     */
-    @Test
-    public void testModifyOrderStatusByUserName ( ) throws Exception {
-//TODO: Test goes here... 
-    }
-
 
 } 

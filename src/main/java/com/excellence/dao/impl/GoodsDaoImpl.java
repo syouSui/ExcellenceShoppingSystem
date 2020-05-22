@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao {
     private String FINDAll = "select * from goods;";
-    private String FINDBy_goodsName = "select * from goods where goodsName like %?%;";
+    private String FINDBy_goodsName = "select * from goods where goodsName like  '%'|| ? ||'%'";
     private String FINDBy_goodsClassification = "select * from goods where goodsClassification=?;";
     private String ADD = "insert into goods values(?,?,?,?,?,?,?,?);";
     private String REMOVE = "delete from goods where goodsNumber=?;";
-    private String MODIFY = "update goods as g set g.goodsPictureTop=?, g.goodsClassification=?, g.goodsName=?, g.priceOrigin=?, g.priceSale=?, g.counter=?, g.goodsPicture=? where t.goodsNumber=?;";
+    private String MODIFY = "update goods as g set g.goodsPictureTop=?, g.goodsClassification=?, g.goodsName=?, g.priceOrigin=?, g.priceSale=?, g.counter=?, g.goodsPicture=? where g.goodsNumber=?;";
 
     @Override
     public List<Goods> findAllGoods ( ) {
@@ -42,7 +42,7 @@ public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao 
                         rs.getFloat( "priceOrigin" ),
                         rs.getFloat( "priceSale" ),
                         rs.getInt( "counter" ),
-                        rs.getString( "classificationName" )
+                        rs.getString( "goodsPicture" )
                 ) );
             }
         } catch ( SQLException e ) {
@@ -52,7 +52,7 @@ public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao 
         return list;
     }
     @Override
-    public List<Goods> fingBy_goodsName ( String goodsName ) {
+    public List<Goods> findBy_goodsName ( String goodsName ) {
         List<Goods> list = new ArrayList<>( );
         super.getConnection( );
         String[] param = new String[] {
@@ -70,7 +70,7 @@ public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao 
                         rs.getFloat( "priceOrigin" ),
                         rs.getFloat( "priceSale" ),
                         rs.getInt( "counter" ),
-                        rs.getString( "classificationName" )
+                        rs.getString( "goodsPicture" )
                 ) );
             }
         } catch ( SQLException e ) {
@@ -98,7 +98,7 @@ public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao 
                         rs.getFloat( "priceOrigin" ),
                         rs.getFloat( "priceSale" ),
                         rs.getInt( "counter" ),
-                        rs.getString( "classificationName" )
+                        rs.getString( "goodsPicture" )
                 ) );
             }
         } catch ( SQLException e ) {

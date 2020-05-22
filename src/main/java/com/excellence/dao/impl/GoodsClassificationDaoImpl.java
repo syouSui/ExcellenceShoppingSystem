@@ -21,7 +21,7 @@ public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassific
     private String FIND = "select * from goods_classification;";
     private String ADD = "insert into goods_classification values(?,?);";
     private String REMOVE = "delete from goods_classification where goodsClassification=?;";
-    private String MODIFY = "update goods_classification set classification=? where classification=?;";
+    private String MODIFY = "update goods_classification set classificationName = ? where goodsClassification = ?;";
 
     @Override
     public List<GoodsClassification> findAllGoodsClassification ( ) {
@@ -58,28 +58,26 @@ public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassific
     }
 
     @Override
-    public int[] removeGoodsClassification ( GoodsClassification goodsClassification ) {
-        int[] count = new int[] { 0, 0 };
+    public int removeGoodsClassification ( GoodsClassification goodsClassification ) {
+        int count = 0;
         super.getConnection( );
         String[] param = new String[] {
                 goodsClassification.getGoodsClassification( ),
         };
-        count[0] = super.executeUpdate( REMOVE, param );
-        count[1] = super.executeUpdate( "delete * from goods where goodsClassification=?;", new String[] { goodsClassification.getGoodsClassification( ) } );
+        count = super.executeUpdate( REMOVE, param );
         super.closeAll( );
         return count;
     }
 
     @Override
-    public int[] modifyGoodsClassification ( GoodsClassification goodsClassification, String wantGoodsClassification ) {
-        int[] count = new int[] { 0, 0 };
+    public int modifyGoodsClassification ( GoodsClassification goodsClassification, String wantGoodsClassification ) {
+        int count = 0;
         super.getConnection( );
         String[] param = new String[] {
                 wantGoodsClassification,
                 goodsClassification.getGoodsClassification( ),
         };
-        count[0] = super.executeUpdate( MODIFY, param );
-        count[1] = super.executeUpdate( "update goods set goodsClassification=? where goodsClassification=?;", new String[] { wantGoodsClassification, goodsClassification.getGoodsClassification() } );
+        count = super.executeUpdate( MODIFY, param );
         super.closeAll( );
         return count;
     }

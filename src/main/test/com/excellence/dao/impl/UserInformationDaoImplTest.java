@@ -1,8 +1,13 @@
-package test.com.excellence.dao.impl;
+package com.excellence.dao.impl;
 
+import com.excellence.dao.UserInformationDao;
+import com.excellence.model.UserInformation;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * UserInformationDaoImpl Tester.
@@ -12,6 +17,8 @@ import org.junit.After;
  * @since <pre>5月 21, 2020</pre>
  */
 public class UserInformationDaoImplTest {
+    static UserInformationDao userInformationDao = new UserInformationDaoImpl( );
+    static List<UserInformation> userInformationList = new ArrayList<>( );
 
     @Before
     public void before ( ) throws Exception {
@@ -26,7 +33,7 @@ public class UserInformationDaoImplTest {
      */
     @Test
     public void testFindBy_userName ( ) throws Exception {
-//TODO: Test goes here... 
+        userInformationList = userInformationDao.findBy_userName( "lyx" );
     }
 
     /**
@@ -34,7 +41,12 @@ public class UserInformationDaoImplTest {
      */
     @Test
     public void testAdd ( ) throws Exception {
-//TODO: Test goes here... 
+        userInformationDao.add( new UserInformation(
+                "lyx",
+                "dpxwz_lyx",
+                "wfu",
+                "18888889999" )
+        );
     }
 
     /**
@@ -42,7 +54,12 @@ public class UserInformationDaoImplTest {
      */
     @Test
     public void testRemove ( ) throws Exception {
-//TODO: Test goes here... 
+        userInformationDao.remove( new UserInformation(
+                "lyx",
+                "dpxwz_lyx",
+                "wfu",
+                "18888889999" )
+        );
     }
 
     /**
@@ -50,7 +67,18 @@ public class UserInformationDaoImplTest {
      */
     @Test
     public void testModify ( ) throws Exception {
-//TODO: Test goes here... 
+        userInformationDao.modify(
+                new UserInformation(
+                        "lyx",
+                        "dpxwz_lyx",
+                        "wfu",
+                        "18888889999" ),
+                new UserInformation(
+                        "lyx",
+                        "dpxwz_lyx_modifyTest",
+                        "wfuwfu",
+                        "0000000000000" )
+        );
     }
 
 

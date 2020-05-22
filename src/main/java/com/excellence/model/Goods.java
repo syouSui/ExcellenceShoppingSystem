@@ -17,6 +17,10 @@ public class Goods {
     private int counter;
     private String goodPicture;
 
+    public Goods () {
+
+    }
+
     public Goods(String goodsNumber, String goodsPictureTop, String goodsClassification, String goodsName, float priceOrigin, float priceSale, int counter, String goodPicture) {
         this.goodsNumber = goodsNumber;
         this.goodsPictureTop = goodsPictureTop;

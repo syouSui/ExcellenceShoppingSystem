@@ -11,7 +11,10 @@ package com.excellence.model;
 public class HeadPicture {
     private String pictureAddress;
 
-    public HeadPicture(String pictureAddress) {
+    public HeadPicture ( ) {
+    }
+
+    public HeadPicture( String pictureAddress) {
         this.pictureAddress = pictureAddress;
     }
 

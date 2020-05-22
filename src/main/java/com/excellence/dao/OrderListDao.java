@@ -28,5 +28,4 @@ public interface OrderListDao {
 
     public int modify ( OrderList orderList );
 
-    public int modifyOrderStatusByUserName( String userName );
 }

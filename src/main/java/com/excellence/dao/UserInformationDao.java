@@ -28,5 +28,5 @@ public interface UserInformationDao {
 
     public int remove ( UserInformation userInformation );
 
-    public int modify ( UserInformation userInformation );
+    public int[] modify ( UserInformation from, UserInformation to);
 }

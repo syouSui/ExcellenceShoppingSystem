@@ -8,6 +8,7 @@ import com.excellence.util.DBUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,14 +22,14 @@ import java.util.List;
 public class UserInformationDaoImpl extends DBUtil implements UserInformationDao {
     String selectSQL= "select * from user_information where 1=1 ";
     String select_userName = "and userName = ? ";
-    String modifySQL = "update user_information set relativeName = ?, address = ?, relativePhone = ? where userName = ? ";
-    String insertSQL = "insert insert into user_information values(?,?,?,?)";
-    String removeSQL = "delete from user where userName = ? and relativeName = ? and address = ? and relativePhone = ? ";
+    String modifySQL = "";
+    String insertSQL = "insert into user_information values(?,?,?,?)";
+    String removeSQL = "delete from user_information where userName = ? and relativeName = ? and address = ? and relativePhone = ? ";
 
 
     @Override
     public List<UserInformation> findBy_userName ( String userName ) {
-        List<UserInformation> userInformationList = null;
+        List<UserInformation> userInformationList = new ArrayList<>();
         ResultSet resultSet = null;
         String[] param = new String[]{ userName };
         super.getConnection();
@@ -81,7 +82,11 @@ public class UserInformationDaoImpl extends DBUtil implements UserInformationDao
     }
 
     @Override
-    public int modify ( UserInformation userInformation ) {//#########################################################
-        return 0;
+    public int[] modify ( UserInformation from, UserInformation to ) {
+        int[] count = new int[] { 0, 0 };
+        count[0] = remove( from );
+        count[1] = add( to );
+        return count;
     }
+
 }

@@ -21,7 +21,7 @@ import java.util.List;
 public interface GoodsDao {
     public List<Goods> findAllGoods ( );
 
-    public List<Goods> fingBy_goodsName( String goodsName );
+    public List<Goods> findBy_goodsName( String goodsName );
 
     public List<Goods> findBy_goodsClassification(String goodsClassification );
 

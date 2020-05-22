@@ -6,6 +6,7 @@ import com.excellence.util.DBUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,74 +18,74 @@ import java.util.List;
  * @Description TODO
  */
 public class ShoppingCartDaoImpl extends DBUtil implements ShoppingCartDao {
-    String selectSQL= "select * from shopping_cart where 1=1 ";
+    String selectSQL = "select * from shopping_cart where 1=1 ";
     String select_userName = "and userName = ? ";
-    String insertSQL = "insert insert into shopping_cart values(?,?,?)";
-    String removeSQL = "delete from order_list where userName = ? and goodsNumber = ? and counter = ?";
-    String modifySQL = "update order_list set counter = ? where userName = ? and goodsNumber = ? ";
+    String insertSQL = "insert into shopping_cart values(?,?,?)";
+    String removeSQL = "delete from shopping_cart where userName = ? and goodsNumber = ? and counter = ?";
+    String modifySQL = "update shopping_cart set counter = ? where userName = ? and goodsNumber = ? ";
 
     @Override
     public List<ShoppingCart> findBy_userName ( String userName ) {
-        List<ShoppingCart> shoppingCartList = null;
+        List<ShoppingCart> shoppingCartList = new ArrayList<>( );
         ResultSet resultSet = null;
-        String[] param = new String[]{ userName };
-        super.getConnection();
-        resultSet = super.executeQuery(selectSQL+select_userName,param);
+        String[] param = new String[] { userName };
+        super.getConnection( );
+        resultSet = super.executeQuery( selectSQL + select_userName, param );
         try {
-            while (resultSet.next()) {
+            while ( resultSet.next( ) ) {
                 ShoppingCart shoppingCart = new ShoppingCart(
-                        resultSet.getString("userName"),
-                        resultSet.getNString("goodsNumber"),
-                        resultSet.getInt("counter")
+                        resultSet.getString( "userName" ),
+                        resultSet.getString( "goodsNumber" ),
+                        resultSet.getInt( "counter" )
                 );
-                shoppingCartList.add(shoppingCart);
+                shoppingCartList.add( shoppingCart );
             }
-        }catch (SQLException throwables){
-            throwables.printStackTrace();
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
-        super.closeAll();
+        super.closeAll( );
         return shoppingCartList;
     }
 
     @Override
     public int add ( ShoppingCart shoppingCart ) {
         int count = 0;
-        String[] param = new String[]{
-                shoppingCart.getUserName(),
-                shoppingCart.getGoodsNumber(),
-                shoppingCart.getCounter()+"",
+        String[] param = new String[] {
+                shoppingCart.getUserName( ),
+                shoppingCart.getGoodsNumber( ),
+                shoppingCart.getCounter( ) + "",
         };
-        super.getConnection();
-        count = super.executeUpdate(insertSQL,param);
-        super.closeAll();
+        super.getConnection( );
+        count = super.executeUpdate( insertSQL, param );
+        super.closeAll( );
         return count;
     }
 
     @Override
     public int remove ( ShoppingCart shoppingCart ) {//#########################################################
         int count = 0;
-        String[] param = new String[]{
-                shoppingCart.getUserName(),
-                shoppingCart.getGoodsNumber(),
-                shoppingCart.getCounter()+"",
+        String[] param = new String[] {
+                shoppingCart.getUserName( ),
+                shoppingCart.getGoodsNumber( ),
+                shoppingCart.getCounter( ) + "",
         };
-        super.getConnection();
-        count = super.executeUpdate(removeSQL,param);
-        super.closeAll();
+        super.getConnection( );
+        count = super.executeUpdate( removeSQL, param );
+        super.closeAll( );
         return count;
     }
 
     @Override
-    public int modify ( ShoppingCart shoppingCart ) {
+    public int modifyCount ( ShoppingCart shoppingCart, int num ) {
         int count = 0;
-        String[] param = new String[]{
-                shoppingCart.getCounter()+"",
-                shoppingCart.getUserName(),
-                shoppingCart.getGoodsNumber(),
+        String[] param = new String[] {
+                num + "",
+                shoppingCart.getUserName( ),
+                shoppingCart.getGoodsNumber( ),
         };
-        super.getConnection();
-        count = super.executeUpdate(modifySQL,param);
-        super.closeAll();
+        super.getConnection( );
+        count = super.executeUpdate( modifySQL, param );
+        super.closeAll( );
         return count;
     }
 }

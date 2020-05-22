@@ -26,5 +26,5 @@ public interface ShoppingCartDao {
 
     public int remove ( ShoppingCart shoppingCart );
 
-    public int modify ( ShoppingCart shoppingCart );
+    public int modifyCount ( ShoppingCart shoppingCart, int num );
 }

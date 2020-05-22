@@ -13,7 +13,10 @@ public class ShoppingCart {
     private String goodsNumber;
     private int counter;
 
-    public ShoppingCart(String userName, String goodsNumber, int counter) {
+    public ShoppingCart ( ) {
+    }
+
+    public ShoppingCart( String userName, String goodsNumber, int counter) {
         this.userName = userName;
         this.goodsNumber = goodsNumber;
         this.counter = counter;

@@ -3,12 +3,13 @@ package com.excellence.dao.impl;
 import com.excellence.dao.OrderListDao;
 import com.excellence.model.OrderList;
 import com.excellence.util.DBUtil;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.OptionalDouble;
 
 /**
  * @author acmaker &
@@ -19,15 +20,15 @@ import java.util.OptionalDouble;
  * @Description TODO
  */
 public class OrderListDaoImpl extends DBUtil implements OrderListDao {
-    String selectSQL= "select * from order_list where 1=1 ";
-    String select_userName = "and userName = ? ";
-    String insertSQL = "insert into user values(?,?,?,?,?,?,?,?,?)";
-    String modifySQL = "update order_list set counter = ?, relativeName = ?, address = ?, relativeName = ?, address = ?, relativePhone = ?, orderStatus = ? where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
-    String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
+    private String selectSQL= "select * from order_list where 1=1 ";
+    private String select_userName = "and userName = ? ";
+    private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?)";
+    private String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
+    private String modifySQL = "update order_list set counter = ?,relativeName = ?, address = ?, relativePhone = ?, orderStatus = ? where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
 
     @Override
     public List<OrderList> findBy_userName ( String userName ) {
-        List<OrderList> orderLists = null;
+        List<OrderList> orderLists =new ArrayList<>();
         ResultSet resultSet = null;
         String[] param = new String[]{ userName };
         super.getConnection();
@@ -36,9 +37,9 @@ public class OrderListDaoImpl extends DBUtil implements OrderListDao {
             while (resultSet.next()) {
                 OrderList orderList = new OrderList(
                         resultSet.getString("orderId"),
-                        resultSet.getDate("orderDate"),
+                        resultSet.getString("orderDate"),
                         resultSet.getString("userName"),
-                        resultSet.getNString("goodsNumber"),
+                        resultSet.getString("goodsNumber"),
                         resultSet.getInt("counter"),
                         resultSet.getString("relativeName"),
                         resultSet.getString("address"),
@@ -82,11 +83,6 @@ public class OrderListDaoImpl extends DBUtil implements OrderListDao {
                 orderList.getOrderDate()+"",
                 orderList.getUserName(),
                 orderList.getGoodsNumber(),
-                orderList.getCounter()+"",
-                orderList.getRelativeName(),
-                orderList.getAddress(),
-                orderList.getRelativePhone(),
-                orderList.getOrderStatus()+""
         };
         super.getConnection();
         count = super.executeUpdate(removeSQL,param);
@@ -113,8 +109,6 @@ public class OrderListDaoImpl extends DBUtil implements OrderListDao {
         return count;
     }
 
-    @Override
-    public int modifyOrderStatusByUserName (String userName) {//#########################################################
-        return 0;
-    }
+
+
 }

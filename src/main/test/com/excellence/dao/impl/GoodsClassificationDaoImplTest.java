@@ -51,6 +51,10 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testAddGoodsClassification ( ) throws Exception {
+        goodsClassificationDao.addGoodsClassification( new GoodsClassification(
+                "4",
+                "d" )
+        );
         show( );
     }
 
@@ -59,6 +63,10 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testRemoveGoodsClassification ( ) throws Exception {
+        goodsClassificationDao.removeGoodsClassification( new GoodsClassification(
+                "4",
+                "d" )
+        );
         show( );
     }
 
@@ -67,6 +75,11 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testModifyGoodsClassification ( ) throws Exception {
+        goodsClassificationDao.modifyGoodsClassification( new GoodsClassification(
+                "4",
+                "d" ),
+                "hhh"
+        );
         show( );
     }
 }

@@ -1,8 +1,14 @@
-package test.com.excellence.dao.impl;
+package com.excellence.dao.impl;
 
+import com.excellence.dao.GoodsDao;
+import com.excellence.dao.impl.GoodsDaoImpl;
+import com.excellence.model.Goods;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * GoodsDaoImpl Tester.
@@ -12,6 +18,9 @@ import org.junit.After;
  * @since <pre>5月 21, 2020</pre>
  */
 public class GoodsDaoImplTest {
+
+    static GoodsDao goodsDao = new GoodsDaoImpl( );
+    static List<Goods> goodsList = new ArrayList<>( );
 
     @Before
     public void before ( ) throws Exception {
@@ -26,15 +35,15 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testFindAllGoods ( ) throws Exception {
-//TODO: Test goes here... 
+        goodsList = goodsDao.findAllGoods( );
     }
 
     /**
      * Method: fingBy_goodsName(String goodsName)
      */
     @Test
-    public void testFingBy_goodsName ( ) throws Exception {
-//TODO: Test goes here... 
+    public void testFindBy_goodsName ( ) throws Exception {
+        goodsList = goodsDao.findBy_goodsName( "pp" );
     }
 
     /**
@@ -42,7 +51,7 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testFindBy_goodsClassification ( ) throws Exception {
-//TODO: Test goes here... 
+        goodsList = goodsDao.findBy_goodsClassification( "1" );
     }
 
     /**
@@ -50,7 +59,17 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testAddGoods ( ) throws Exception {
-//TODO: Test goes here... 
+        goodsDao.addGoods( new Goods(
+                        "88",
+                        "3.jpg",
+                        "3",
+                        "banana",
+                        (float) 8.8,
+                        (float) 8,
+                        10,
+                        "8.jpg"
+                )
+        );
     }
 
     /**
@@ -58,7 +77,7 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testRemoveGoods ( ) throws Exception {
-//TODO: Test goes here... 
+        goodsDao.removeGoods( "88" );
     }
 
     /**
@@ -66,7 +85,19 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testModifyGoods ( ) throws Exception {
-//TODO: Test goes here... 
+        goodsDao.modifyGoods(
+                new Goods(
+                        "88",
+                        "3.jpg",
+                        "3",
+                        "banana",
+                        (float) 8.8,
+                        (float) 8,
+                        9999,
+                        "8.jpg"
+                ),
+                "88"
+        );
     }
 
 

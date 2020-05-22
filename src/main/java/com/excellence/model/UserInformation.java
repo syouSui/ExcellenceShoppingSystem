@@ -14,7 +14,10 @@ public class UserInformation {
     private String address;
     private String relativePhone;
 
-    public UserInformation(String userName, String relativeName, String address, String relativePhone) {
+    public UserInformation ( ) {
+    }
+
+    public UserInformation( String userName, String relativeName, String address, String relativePhone) {
         this.userName = userName;
         this.relativeName = relativeName;
         this.address = address;
