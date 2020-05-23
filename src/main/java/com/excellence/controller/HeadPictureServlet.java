@@ -10,8 +10,8 @@ import java.io.IOException;
 /**
  * @author acmaker
  * @version 1.0.0
- * @ClassName ${NAME}.java
- * @PackageLoaction ${PACKAGE_NAME}
+ * @ClassName HeadPictureServlet.java
+ * @PackageLoaction com.excellence.controller
  * @createTime 2020-05-22 17:22:00 星期五
  * @Description TODO
  */

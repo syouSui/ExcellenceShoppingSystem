@@ -10,21 +10,21 @@ import java.io.IOException;
 /**
  * @author acmaker
  * @version 1.0.0
- * @ClassName ${NAME}.java
- * @PackageLoaction ${PACKAGE_NAME}
+ * @ClassName UserServlet.java
+ * @PackageLoaction com.excellence.controller
  * @createTime 2020-05-22 17:21:00 星期五
  * @Description TODO
  */
 @WebServlet ( "/UserServlet" )
 public class UserServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        ...? json
-        switch( str_methond_name ) {
-            case "showAllUser":{
-                showAllUser();
-                break;
-            }
-        }
+//        ...? json
+//        switch( str_methond_name ) {
+//            case "showAllUser":{
+//                showAllUser();
+//                break;
+//            }
+//        }
     }
 
     protected void doGet ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
