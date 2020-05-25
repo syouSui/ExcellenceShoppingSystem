@@ -1,23 +1,23 @@
 package com.excellence.dao.impl;
 
 import com.excellence.model.Goods;
-import com.excellence.model.GoodsClassification;
-import com.excellence.util.DBUtil;
+import com.excellence.util.C3P0Utils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author acmaker
+ * @author acmaker & Kaffu-chino
  * @version 1.0.0
  * @ClassName GoodsDao.java
  * @PackageLoaction com.excellence.dao.impl
  * @createTime 2020-05-20 19:05:00 星期三
  * @Description TODO
  */
-public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao {
+public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsDao {
     private String FINDAll = "select * from goods;";
     private String FINDBy_goodsName = "select * from goods where goodsName like  '%'|| ? ||'%'";
     private String FINDBy_goodsClassification = "select * from goods where goodsClassification=?;";
@@ -28,89 +28,61 @@ public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao 
     @Override
     public List<Goods> findAllGoods ( ) {
         List<Goods> list = new ArrayList<>( );
-        super.getConnection( );
-        String[] param = new String[] { };
-        ResultSet rs = null;
-        rs = super.executeQuery( FINDAll, param );
+        Object[] param = new Object[] { };
         try {
-            while ( rs.next( ) ) {
-                list.add( new Goods(
-                        rs.getString( "goodsNumber" ),
-                        rs.getString( "goodsPictureTop" ),
-                        rs.getString( "goodsClassification" ),
-                        rs.getString( "goodsName" ),
-                        rs.getFloat( "priceOrigin" ),
-                        rs.getFloat( "priceSale" ),
-                        rs.getInt( "counter" ),
-                        rs.getString( "goodsPicture" )
-                ) );
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace( );
+            list = new QueryRunner(super.getDataSource()).query(
+                    super.getConnection(),
+                    FINDAll,
+                    new BeanListHandler<>(Goods.class),
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        super.closeAll( );
+        super.closeConnection( );
         return list;
     }
     @Override
     public List<Goods> findBy_goodsName ( String goodsName ) {
         List<Goods> list = new ArrayList<>( );
-        super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 goodsName
         };
-        ResultSet rs = null;
-        rs = super.executeQuery( FINDBy_goodsName, param );
         try {
-            while ( rs.next( ) ) {
-                list.add( new Goods(
-                        rs.getString( "goodsNumber" ),
-                        rs.getString( "goodsPictureTop" ),
-                        rs.getString( "goodsClassification" ),
-                        rs.getString( "goodsName" ),
-                        rs.getFloat( "priceOrigin" ),
-                        rs.getFloat( "priceSale" ),
-                        rs.getInt( "counter" ),
-                        rs.getString( "goodsPicture" )
-                ) );
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace( );
+            list = new QueryRunner(super.getDataSource()).query(
+                    super.getConnection(),
+                    FINDBy_goodsName,
+                    new BeanListHandler<>(Goods.class),
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        super.closeAll( );
+        super.closeConnection( );
         return list;
     }
     @Override
     public List<Goods> findBy_goodsClassification ( String goodsClassification ) {
         List<Goods> list = new ArrayList<>( );
-        super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 goodsClassification
         };
-        ResultSet rs = null;
-        rs = super.executeQuery( FINDBy_goodsClassification, param );
         try {
-            while ( rs.next( ) ) {
-                list.add( new Goods(
-                        rs.getString( "goodsNumber" ),
-                        rs.getString( "goodsPictureTop" ),
-                        rs.getString( "goodsClassification" ),
-                        rs.getString( "goodsName" ),
-                        rs.getFloat( "priceOrigin" ),
-                        rs.getFloat( "priceSale" ),
-                        rs.getInt( "counter" ),
-                        rs.getString( "goodsPicture" )
-                ) );
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace( );
+            list = new QueryRunner(super.getDataSource()).query(
+                    super.getConnection(),
+                    FINDBy_goodsClassification,
+                    new BeanListHandler<>(Goods.class),
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        super.closeAll( );
+        super.closeConnection( );
         return list;
     }
     @Override
     public int addGoods ( Goods goods ) {
-        super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 goods.getGoodsNumber( ),
                 goods.getGoodsPictureTop( ),
                 goods.getGoodsClassification( ),
@@ -119,28 +91,42 @@ public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao 
                 goods.getPriceSale( ) + "",
                 goods.getCounter( ) + "",
                 goods.getGoodPicture( )
-
         };
-        int count = super.executeUpdate( ADD, param );
-        super.closeAll( );
+        int count = 0;
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    ADD,
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( );
         return count;
     }
     @Override
     public int removeGoods ( String goodsNumber ) {
         int count = 0;
-        super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 goodsNumber
         };
-        count = super.executeUpdate( REMOVE, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    REMOVE,
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( );
         return count;
     }
     @Override
     public int modifyGoods ( Goods goods, String goodsNumber ) {
         int count = 0;
-        super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 goods.getGoodsPictureTop( ),
                 goods.getGoodsClassification( ),
                 goods.getGoodsName( ),
@@ -150,8 +136,16 @@ public class GoodsDaoImpl extends DBUtil implements com.excellence.dao.GoodsDao 
                 goods.getGoodPicture( ),
                 goodsNumber
         };
-        count = super.executeUpdate( MODIFY, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    MODIFY,
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( );
         return count;
     }
 }

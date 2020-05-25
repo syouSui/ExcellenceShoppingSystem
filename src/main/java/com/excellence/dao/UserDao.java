@@ -28,7 +28,7 @@ public interface UserDao {
 
     public int addUser(User user);
 
-    public int removeUser(User user);
+    public int removeUser(String userName );
 
     public int modifyUser(User user,String userName);
 

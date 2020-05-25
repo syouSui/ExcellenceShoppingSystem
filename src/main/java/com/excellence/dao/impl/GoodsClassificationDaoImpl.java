@@ -2,22 +2,23 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.GoodsClassificationDao;
 import com.excellence.model.GoodsClassification;
-import com.excellence.util.DBUtil;
+import com.excellence.util.C3P0Utils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author acmaker
+ * @author acmaker & Kaffu-chino
  * @version 1.0.0
  * @ClassName GoodsClassificationDaoImpl.java
  * @PackageLoaction com.excellence.dao.impl
  * @createTime 2020-05-20 19:05:00 星期三
  * @Description TODO
  */
-public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassificationDao {
+public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassificationDao {
     private String FIND = "select * from goods_classification;";
     private String ADD = "insert into goods_classification values(?,?);";
     private String REMOVE = "delete from goods_classification where goodsClassification=?;";
@@ -26,59 +27,73 @@ public class GoodsClassificationDaoImpl extends DBUtil implements GoodsClassific
     @Override
     public List<GoodsClassification> findAllGoodsClassification ( ) {
         List<GoodsClassification> list = new ArrayList<>( );
-        super.getConnection( );
-        String[] param = new String[] { };
-        ResultSet rs = null;
-        rs = super.executeQuery( FIND, param );
+        Object[] param = new Object[] { };
         try {
-            while ( rs.next( ) ) {
-                list.add( new GoodsClassification(
-                        rs.getString( "goodsClassification" ),
-                        rs.getString( "classificationName" )
-                ) );
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace( );
+            list = new QueryRunner(super.getDataSource()).query(
+                    getConnection(),
+                    FIND,
+                    new BeanListHandler<>(GoodsClassification.class),
+                    param);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        super.closeAll( );
+        super.closeConnection( );
         return list;
     }
 
     @Override
     public int addGoodsClassification ( GoodsClassification goodsClassification ) {
         int count = 0;
-        super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 goodsClassification.getGoodsClassification( ),
                 goodsClassification.getClassificationName( )
         };
-        count = super.executeUpdate( ADD, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    ADD,
+                    param);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( );
         return count;
     }
 
     @Override
-    public int removeGoodsClassification ( GoodsClassification goodsClassification ) {
+    public int removeGoodsClassification ( String goodsClassification ) {
         int count = 0;
-        super.getConnection( );
-        String[] param = new String[] {
-                goodsClassification.getGoodsClassification( ),
+        Object[] param = new Object[] {
+                goodsClassification
         };
-        count = super.executeUpdate( REMOVE, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    REMOVE,
+                    param);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( );
         return count;
     }
 
     @Override
     public int modifyGoodsClassification ( GoodsClassification goodsClassification, String wantGoodsClassification ) {
         int count = 0;
-        super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 wantGoodsClassification,
                 goodsClassification.getGoodsClassification( ),
         };
-        count = super.executeUpdate( MODIFY, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    MODIFY,
+                    param);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( );
         return count;
     }
 }

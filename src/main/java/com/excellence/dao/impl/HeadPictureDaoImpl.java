@@ -47,7 +47,6 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
     @Override
     public int add ( HeadPicture headPicture ) {
         int count = 0;
-        super.getConnection( );
         Object[] param = new Object[] {
                 headPicture.getPictureAddress( )
         };
@@ -67,7 +66,6 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
     @Override
     public int remove ( HeadPicture headPicture ) {
         int count = 0;
-        super.getConnection( );
         Object[] param = new Object[] {
                 headPicture.getPictureAddress( )
         };
@@ -86,7 +84,6 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
     @Override
     public int modify ( HeadPicture from, HeadPicture to ) {
         int count = 0;
-        super.getConnection( );
         Object[] param = new Object[] {
                 to.getPictureAddress( ),
                 from.getPictureAddress( )

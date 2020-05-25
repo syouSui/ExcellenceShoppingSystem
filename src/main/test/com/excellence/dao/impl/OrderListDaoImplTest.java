@@ -75,14 +75,14 @@ public class OrderListDaoImplTest {
     public void testRemove ( ) throws Exception {
         orderListDao.remove( new OrderList(
                 "12",
-                "2020-05-22 02:18:03",
+                "2020-05-22 02:36:57",
                 "lyx",
                 "000988888",
-                0,
-                "",
-                "",
-                "",
-                0)
+                99,
+                "lyx_test",
+                "wfu",
+                "18888889999",
+                1)
         );
     }
 
@@ -93,13 +93,13 @@ public class OrderListDaoImplTest {
     public void testModify ( ) throws Exception {
         orderListDao.modify( new OrderList(
                 "12",
-                "2020-05-22 02:36:57",
+                "2020-05-25 08:58:36",
                 "lyx",
                 "000988888",
                 99,
                 "lyx_test",
                 "wfu",
-                "18888889999",
+                "-1",
                 1)
         );
     }

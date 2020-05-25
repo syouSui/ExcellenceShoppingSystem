@@ -56,9 +56,9 @@ public class UserInformationDaoImplTest {
     public void testRemove ( ) throws Exception {
         userInformationDao.remove( new UserInformation(
                 "lyx",
-                "dpxwz_lyx",
-                "wfu",
-                "18888889999" )
+                "dpxwz_lyx_modifyTest",
+                "wfuwfu",
+                "0000000000000" )
         );
     }
 

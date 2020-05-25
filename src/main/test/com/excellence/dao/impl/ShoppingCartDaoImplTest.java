@@ -34,7 +34,7 @@ public class ShoppingCartDaoImplTest extends TestCase {
      */
     @Test
     public void testFindBy_userName ( ) throws Exception {
-        shoppingCartDao.findBy_userName( "lyx" );
+        shoppingCartList = shoppingCartDao.findBy_userName( "lyx" );
     }
 
     /**
@@ -42,11 +42,12 @@ public class ShoppingCartDaoImplTest extends TestCase {
      */
     @Test
     public void testAdd ( ) throws Exception {
-        shoppingCartDao.add( new ShoppingCart(
+        int count = shoppingCartDao.add( new ShoppingCart(
                 "lyx",
-                "77272281",
-                3 )
+                "77272000281",
+                7 )
         );
+        System.out.println( count );
     }
 
     /**
@@ -56,8 +57,8 @@ public class ShoppingCartDaoImplTest extends TestCase {
     public void testRemove ( ) throws Exception {
         shoppingCartDao.remove( new ShoppingCart(
                 "lyx",
-                "77272281",
-                3 )
+                "77272200081",
+                99 )
         );
     }
 
@@ -66,7 +67,7 @@ public class ShoppingCartDaoImplTest extends TestCase {
         shoppingCartDao.modifyCount(
                 new ShoppingCart(
                         "lyx",
-                        "77272281",
+                        "77272200081",
                         3 ),
                 99
         );

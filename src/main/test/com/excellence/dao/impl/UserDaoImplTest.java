@@ -49,7 +49,7 @@ public class UserDaoImplTest {
      */
     @Test
     public void testFindAllUser ( ) throws Exception {
-        show();
+        show( );
     }
 
     /**
@@ -73,7 +73,7 @@ public class UserDaoImplTest {
      */
     @Test
     public void testFindBy_userEmail_userPassword ( ) throws Exception {
-        User user = userDao.findBy_userEmail_userPassword( "hhh@hhh.com","123456" );
+        User user = userDao.findBy_userEmail_userPassword( "hhh@hhh.com", "123456" );
         System.out.println(
                 user.getUserName( ) + "\t" +
                         user.getUserNickname( ) + "\t" +
@@ -89,7 +89,16 @@ public class UserDaoImplTest {
      */
     @Test
     public void testAddUser ( ) throws Exception {
-//TODO: Test goes here... 
+        userDao.addUser(
+                new User(
+                        "hhh",
+                        "hhh",
+                        "hhh",
+                        0,
+                        "111222333444",
+                        "1231231@1.com" )
+        );
+        show( );
     }
 
     /**
@@ -97,7 +106,8 @@ public class UserDaoImplTest {
      */
     @Test
     public void testRemoveUser ( ) throws Exception {
-//TODO: Test goes here... 
+        userDao.removeUser( "hhh" );
+        show( );
     }
 
     /**
@@ -105,8 +115,17 @@ public class UserDaoImplTest {
      */
     @Test
     public void testModifyUser ( ) throws Exception {
-//TODO: Test goes here... 
+        userDao.modifyUser(
+                new User(
+                        "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+                        "aaa",
+                        "aaa",
+                        0,
+                        "888888888888888888",
+                        "8881@1.com" ),
+                "hhh"
+        );
+        show( );
     }
-
 
 } 

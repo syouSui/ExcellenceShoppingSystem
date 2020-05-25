@@ -2,24 +2,23 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.OrderListDao;
 import com.excellence.model.OrderList;
-import com.excellence.util.DBUtil;
+import com.excellence.util.C3P0Utils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * @author acmaker &
+ * @author acmaker & Kaffu-chino
  * @version 1.0.0
  * @ClassName OrderListDaoImpl.java
  * @PackageLoaction com.excellence.dao.impl
  * @createTime 2020-05-20 19:07:00 星期三
  * @Description TODO
  */
-public class OrderListDaoImpl extends DBUtil implements OrderListDao {
+public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     private String selectSQL= "select * from order_list where 1=1 ";
     private String select_userName = "and userName = ? ";
     private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?)";
@@ -29,36 +28,25 @@ public class OrderListDaoImpl extends DBUtil implements OrderListDao {
     @Override
     public List<OrderList> findBy_userName ( String userName ) {
         List<OrderList> orderLists =new ArrayList<>();
-        ResultSet resultSet = null;
-        String[] param = new String[]{ userName };
-        super.getConnection();
-        resultSet = super.executeQuery(selectSQL+select_userName,param);
+        Object[] param = new Object[]{ userName };
         try {
-            while (resultSet.next()) {
-                OrderList orderList = new OrderList(
-                        resultSet.getString("orderId"),
-                        resultSet.getString("orderDate"),
-                        resultSet.getString("userName"),
-                        resultSet.getString("goodsNumber"),
-                        resultSet.getInt("counter"),
-                        resultSet.getString("relativeName"),
-                        resultSet.getString("address"),
-                        resultSet.getString("relativePhone"),
-                        resultSet.getInt("orderStatus")
-                );
-                orderLists.add(orderList);
-            }
-        }catch (SQLException throwables){
+            orderLists = new QueryRunner(super.getDataSource()).query(
+                    super.getConnection(),
+                    selectSQL+select_userName,
+                    new BeanListHandler<>(OrderList.class),
+                    param
+            );
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeAll();
+        super.closeConnection();
         return orderLists;
     }
 
     @Override
     public int add ( OrderList orderList ) {
         int count = 0;
-        String[] param = new String[]{
+        Object[] param = new Object[]{
                 orderList.getOrderId(),
                 orderList.getOrderDate()+"",
                 orderList.getUserName(),
@@ -69,31 +57,45 @@ public class OrderListDaoImpl extends DBUtil implements OrderListDao {
                 orderList.getRelativePhone(),
                 orderList.getOrderStatus()+""
         };
-        super.getConnection();
-        count = super.executeUpdate(insertSQL,param);
-        super.closeAll();
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    insertSQL,
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection();
         return count;
     }
 
     @Override
     public int remove ( OrderList orderList ) {
         int count = 0;
-        String[] param = new String[]{
+        Object[] param = new Object[]{
                 orderList.getOrderId(),
                 orderList.getOrderDate()+"",
                 orderList.getUserName(),
                 orderList.getGoodsNumber(),
         };
-        super.getConnection();
-        count = super.executeUpdate(removeSQL,param);
-        super.closeAll();
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    removeSQL,
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection();
         return count;
     }
 
     @Override
     public int modify ( OrderList orderList ) {
         int count = 0;
-        String[] param = new String[]{
+        Object[] param = new Object[]{
                 orderList.getCounter()+"",
                 orderList.getRelativeName(),
                 orderList.getAddress(),
@@ -104,8 +106,16 @@ public class OrderListDaoImpl extends DBUtil implements OrderListDao {
                 orderList.getUserName(),
                 orderList.getGoodsNumber()
         };
-        super.getConnection();
-        count = super.executeUpdate(modifySQL,param);
+        try {
+            count = new QueryRunner(super.getDataSource()).update(
+                    super.getConnection(),
+                    modifySQL,
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection();
         return count;
     }
 

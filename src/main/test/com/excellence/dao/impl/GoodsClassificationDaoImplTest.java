@@ -63,10 +63,7 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testRemoveGoodsClassification ( ) throws Exception {
-        goodsClassificationDao.removeGoodsClassification( new GoodsClassification(
-                "4",
-                "d" )
-        );
+        goodsClassificationDao.removeGoodsClassification( "4" );
         show( );
     }
 
@@ -78,7 +75,7 @@ public class GoodsClassificationDaoImplTest {
         goodsClassificationDao.modifyGoodsClassification( new GoodsClassification(
                 "4",
                 "d" ),
-                "hhh"
+                "hhhhhh"
         );
         show( );
     }

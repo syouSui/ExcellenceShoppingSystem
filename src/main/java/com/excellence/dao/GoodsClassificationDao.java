@@ -24,7 +24,7 @@ public interface GoodsClassificationDao {
 
     public int addGoodsClassification ( GoodsClassification goodsClassification );
 
-    public int removeGoodsClassification ( GoodsClassification goodsClassification );
+    public int removeGoodsClassification ( String goodsClassification );
 
     public int modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName );
 
