@@ -1,0 +1,21 @@
+<c3p0-config>
+  <!-- 基本配置 -->
+  <default-config>
+  </default-config>
+
+  <!-- 命名的配置 -->
+  <named-config name="mysql">
+    <property name="driverClass">com.mysql.jdbc.Driver</property>
+    <property name="jdbcUrl">jdbc:mysql://acmaker.vip/excellence?useUnicode=true&amp;characterEncoding=utf8 </property>
+    <property name="user">excellence</property>
+    <property name="password">dpxwz666</property>
+    <!--扩展配置-->
+    <property name="checkoutTimeout">3000</property>
+    <property name="idleConnectionTestPeriod">30</property>
+    <property name="initialPoolSize">10</property>
+    <property name="maxIdleTime">30</property>
+    <property name="minPoolSize">10</property>
+    <property name="maxPoolSize">100</property>
+    <property name="maxStatements">100</property>
+  </named-config>
+</c3p0-config>

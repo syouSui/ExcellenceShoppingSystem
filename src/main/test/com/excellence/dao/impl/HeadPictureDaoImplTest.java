@@ -1,12 +1,10 @@
 package com.excellence.dao.impl;
 
 import com.excellence.dao.HeadPictureDao;
-import com.excellence.dao.impl.HeadPictureDaoImpl;
 import com.excellence.model.HeadPicture;
-import junit.framework.TestCase;
-import org.junit.Test;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 
@@ -59,7 +57,7 @@ public class HeadPictureDaoImplTest {
      */
     @Test
     public void testRemove ( ) throws Exception {
-        headPictureDao.modify( new HeadPicture( "6" ), new HeadPicture( "7" ) );
+        headPictureDao.remove( new HeadPicture( "7" ) );
         show( );
     }
 
@@ -68,7 +66,7 @@ public class HeadPictureDaoImplTest {
      */
     @Test
     public void testModify ( ) throws Exception {
-        headPictureDao.remove( new HeadPicture( "7" ) );
+        headPictureDao.modify( new HeadPicture( "6" ), new HeadPicture( "7" ) );
         show( );
     }
 

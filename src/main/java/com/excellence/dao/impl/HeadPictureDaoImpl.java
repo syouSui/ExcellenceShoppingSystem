@@ -2,7 +2,10 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.HeadPictureDao;
 import com.excellence.model.HeadPicture;
+import com.excellence.util.C3P0Utils;
 import com.excellence.util.DBUtil;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +20,7 @@ import java.util.List;
  * @createTime 2020-05-20 19:06:00 星期三
  * @Description TODO
  */
-public class HeadPictureDaoImpl extends DBUtil implements HeadPictureDao {
+public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
     private String FIND = "select * from head_picture;";
     private String ADD = "insert into head_picture values(?);";
     private String REMOVE = "delete from head_picture where pictureAddress=?;";
@@ -25,54 +28,79 @@ public class HeadPictureDaoImpl extends DBUtil implements HeadPictureDao {
 
     @Override
     public List<HeadPicture> findAll ( ) {
-        List<HeadPicture> list = new ArrayList<>( );
-        super.getConnection( );
-        String[] param = new String[] { };
-        ResultSet rs = null;
-        rs = super.executeQuery( FIND, param );
+        List<HeadPicture> list = null;
+        Object[] param = new Object[] { };
         try {
-            while ( rs.next( ) ) {
-                list.add( new HeadPicture( rs.getString( "pictureAddress" )
-                ) );
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace( );
+            list = new QueryRunner( super.getDataSource( ) ).query(
+                    super.getConnection( ),
+                    FIND,
+                    new BeanListHandler<>( HeadPicture.class ),
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
-        super.closeAll( );
+        super.closeConnection( );
         return list;
     }
+
     @Override
     public int add ( HeadPicture headPicture ) {
         int count = 0;
         super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 headPicture.getPictureAddress( )
         };
-        count = super.executeUpdate( ADD, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner( super.getDataSource( ) ).update(
+                    super.getConnection( ),
+                    ADD,
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( );
         return count;
     }
+
     @Override
     public int remove ( HeadPicture headPicture ) {
         int count = 0;
         super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 headPicture.getPictureAddress( )
         };
-        count = super.executeUpdate( REMOVE, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner( super.getDataSource( ) ).update(
+                    super.getConnection( ),
+                    REMOVE,
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( );
         return count;
     }
     @Override
     public int modify ( HeadPicture from, HeadPicture to ) {
         int count = 0;
         super.getConnection( );
-        String[] param = new String[] {
+        Object[] param = new Object[] {
                 to.getPictureAddress( ),
                 from.getPictureAddress( )
         };
-        count = super.executeUpdate( MODIFY, param );
-        super.closeAll( );
+        try {
+            count = new QueryRunner( super.getDataSource( ) ).update(
+                    super.getConnection( ),
+                    MODIFY,
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( );
         return count;
     }
 }
