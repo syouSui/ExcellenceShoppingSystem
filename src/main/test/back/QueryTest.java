@@ -1,6 +1,7 @@
-package com.excellence.util;
+package back;
 
 import com.excellence.model.User;
+import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 

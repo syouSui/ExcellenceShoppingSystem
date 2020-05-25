@@ -1,17 +1,13 @@
 package com.excellence.dao.impl;
 
-import com.excellence.dao.UserDao;
 import com.excellence.dao.UserInformationDao;
-import com.excellence.model.User;
 import com.excellence.model.UserInformation;
 import com.excellence.util.C3P0Utils;
 import com.excellence.util.DBUtil;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
