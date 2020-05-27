@@ -30,7 +30,7 @@
 
 ## 数据库设计
 
-![](https://tousan-download.oss-cn-beijing.aliyuncs.com/excellence/%E6%89%B9%E6%B3%A8%202020-05-27%20201318.png)
+![](https://drive.cafu-chino.top/?/images/2020/05/27/DKh2nsEPVR/%E6%89%B9%E6%B3%A8%202020-05-27%20201318.png)
 
 ## 演示地址
 待上传！
