@@ -3,7 +3,6 @@ package com.excellence.dao.impl;
 import com.excellence.dao.UserDao;
 import com.excellence.model.User;
 import com.excellence.util.C3P0Utils;
-import com.excellence.util.DBUtil;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
