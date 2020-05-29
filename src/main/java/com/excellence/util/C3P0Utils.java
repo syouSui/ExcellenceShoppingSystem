@@ -1,7 +1,6 @@
 package com.excellence.util;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import org.apache.commons.dbutils.QueryRunner;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,13 +16,13 @@ import java.sql.SQLException;
  */
 public class C3P0Utils {
     private static ComboPooledDataSource ds = new ComboPooledDataSource( "mysql" );
-    private Connection conn = null;
 
     public static DataSource getDataSource ( ) {
         return ds;
     }
 
-    public Connection getConnection ( ){
+    public Connection getConnection ( ) {
+        Connection conn = null;
         try {
             conn = ds.getConnection( );
         } catch ( SQLException throwables ) {
@@ -32,9 +31,9 @@ public class C3P0Utils {
         return conn;
     }
 
-    public void closeConnection() {
+    public void closeConnection ( Connection conn ) {
         try {
-            conn.close();
+            conn.close( );
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }

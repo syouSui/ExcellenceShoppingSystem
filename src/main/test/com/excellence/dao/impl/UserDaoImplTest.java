@@ -98,6 +98,17 @@ public class UserDaoImplTest {
                         "111222333444",
                         "1231231@1.com" )
         );
+        userDao.modifyUser(
+                new User(
+                        "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+                        "aaa",
+                        "aaa",
+                        0,
+                        "888888888888888888",
+                        "8881@1.com" ),
+                "hhh"
+        );
+        userDao.removeUser( "hhh" );
         show( );
     }
 

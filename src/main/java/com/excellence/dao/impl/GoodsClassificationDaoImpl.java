@@ -6,6 +6,7 @@ import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +28,25 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
     @Override
     public List<GoodsClassification> findAllGoodsClassification ( ) {
         List<GoodsClassification> list = new ArrayList<>( );
+        Connection conn = super.getConnection();
         Object[] param = new Object[] { };
         try {
             list = new QueryRunner(super.getDataSource()).query(
-                    getConnection(),
+                    conn,
                     FIND,
                     new BeanListHandler<>(GoodsClassification.class),
                     param);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return list;
     }
 
     @Override
     public int addGoodsClassification ( GoodsClassification goodsClassification ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 goodsClassification.getGoodsClassification( ),
                 goodsClassification.getClassificationName( )
@@ -56,13 +59,14 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int removeGoodsClassification ( String goodsClassification ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 goodsClassification
         };
@@ -74,13 +78,14 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int modifyGoodsClassification ( GoodsClassification goodsClassification, String wantGoodsClassification ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 wantGoodsClassification,
                 goodsClassification.getGoodsClassification( ),
@@ -93,7 +98,6 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
-        return count;
+        super.closeConnection( conn ); return count;
     }
 }

@@ -6,6 +6,7 @@ import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
     @Override
     public List<HeadPicture> findAll ( ) {
         List<HeadPicture> list = null;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] { };
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
@@ -37,13 +39,14 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return list;
     }
 
     @Override
     public int add ( HeadPicture headPicture ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 headPicture.getPictureAddress( )
         };
@@ -56,13 +59,14 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int remove ( HeadPicture headPicture ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 headPicture.getPictureAddress( )
         };
@@ -75,12 +79,13 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
     @Override
     public int modify ( HeadPicture from, HeadPicture to ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 to.getPictureAddress( ),
                 from.getPictureAddress( )
@@ -94,7 +99,7 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 }

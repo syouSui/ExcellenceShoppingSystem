@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     @Override
     public List<User> findAllUser ( ) {
         List<User> list = null;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] { };
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
@@ -41,13 +43,14 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return list;
     }
 
     @Override
     public User findBy_userName_userPassword ( String userName, String userPassword ) {
         User user = null;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] { userName, userPassword };
         try {
             user = new QueryRunner( super.getDataSource( ) ).query(
@@ -59,13 +62,14 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return user;
     }
 
     @Override
     public User findBy_userEmail_userPassword ( String userEmail, String userPassword ) {
         User user = null;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] { userEmail, userPassword };
         try {
             user = new QueryRunner( super.getDataSource( ) ).query(
@@ -77,13 +81,14 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return user;
     }
 
     @Override
     public int addUser ( User user ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 user.getUserName( ),
                 user.getUserNickname( ),
@@ -101,13 +106,14 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int removeUser ( String userName ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 userName
         };
@@ -120,13 +126,14 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int modifyUser ( User user, String userName ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 user.getUserNickname( ),
                 user.getUserPassword( ),
@@ -144,7 +151,7 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 }

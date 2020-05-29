@@ -6,6 +6,7 @@ import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
     @Override
     public List<UserInformation> findBy_userName ( String userName ) {
         Object[] param = new Object[] { userName };
+        Connection conn = super.getConnection();
         List<UserInformation> list = null;
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
@@ -39,13 +41,14 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return list;
     }
 
     @Override
     public int add ( UserInformation userInformation ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 userInformation.getUserName( ),
                 userInformation.getRelativeName( ),
@@ -61,13 +64,14 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int remove ( UserInformation userInformation ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 userInformation.getUserName( ),
                 userInformation.getRelativeName( ),
@@ -83,15 +87,17 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int[] modify ( UserInformation from, UserInformation to ) {
+        Connection conn = super.getConnection();
         int[] count = new int[] { 0, 0 };
         count[0] = remove( from );
         count[1] = add( to );
+        super.closeConnection( conn );
         return count;
     }
 

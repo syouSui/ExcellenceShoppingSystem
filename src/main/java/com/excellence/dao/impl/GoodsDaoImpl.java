@@ -5,6 +5,7 @@ import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
     @Override
     public List<Goods> findAllGoods ( ) {
         List<Goods> list = new ArrayList<>( );
+        Connection conn = super.getConnection();
         Object[] param = new Object[] { };
         try {
             list = new QueryRunner(super.getDataSource()).query(
@@ -39,12 +41,13 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return list;
     }
     @Override
     public List<Goods> findBy_goodsName ( String goodsName ) {
         List<Goods> list = new ArrayList<>( );
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 goodsName
         };
@@ -58,12 +61,13 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return list;
     }
     @Override
     public List<Goods> findBy_goodsClassification ( String goodsClassification ) {
         List<Goods> list = new ArrayList<>( );
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 goodsClassification
         };
@@ -77,11 +81,12 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return list;
     }
     @Override
     public int addGoods ( Goods goods ) {
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 goods.getGoodsNumber( ),
                 goods.getGoodsPictureTop( ),
@@ -102,12 +107,13 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
     @Override
     public int removeGoods ( String goodsNumber ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 goodsNumber
         };
@@ -120,12 +126,13 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
     @Override
     public int modifyGoods ( Goods goods, String goodsNumber ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 goods.getGoodsPictureTop( ),
                 goods.getGoodsClassification( ),
@@ -145,7 +152,7 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 }

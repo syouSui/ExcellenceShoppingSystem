@@ -6,6 +6,7 @@ import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
     @Override
     public List<ShoppingCart> findBy_userName ( String userName ) {
         List<ShoppingCart> shoppingCartList = null;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] { userName };
         try {
             shoppingCartList = new QueryRunner( super.getDataSource( ) ).query(
@@ -40,13 +42,14 @@ public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return shoppingCartList;
     }
 
     @Override
     public int add ( ShoppingCart shoppingCart ) {
         List<ShoppingCart> list = null;
+        Connection conn = super.getConnection();
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
                     super.getConnection( ),
@@ -78,14 +81,15 @@ public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
             } catch ( SQLException throwables ) {
                 throwables.printStackTrace( );
             }
-            super.closeConnection( );
+            super.closeConnection( conn );
         }
         return count;
     }
 
     @Override
-    public int remove ( ShoppingCart shoppingCart ) {//#########################################################
+    public int remove ( ShoppingCart shoppingCart ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 shoppingCart.getUserName( ),
                 shoppingCart.getGoodsNumber( ),
@@ -100,13 +104,14 @@ public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int modifyCount ( ShoppingCart shoppingCart, int num ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 num + "",
                 shoppingCart.getUserName( ),
@@ -121,12 +126,13 @@ public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
     @Override
     public int addCount ( ShoppingCart shoppingCart, int num ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[] {
                 num + "",
                 shoppingCart.getUserName( ),
@@ -141,7 +147,7 @@ public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
         } catch ( SQLException throwables ) {
             throwables.printStackTrace( );
         }
-        super.closeConnection( );
+        super.closeConnection( conn );
         return count;
     }
 }

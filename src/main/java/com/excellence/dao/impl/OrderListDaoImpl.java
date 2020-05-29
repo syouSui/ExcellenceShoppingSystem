@@ -6,6 +6,7 @@ import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     @Override
     public List<OrderList> findBy_userName ( String userName ) {
         List<OrderList> orderLists =new ArrayList<>();
+        Connection conn = super.getConnection();
         Object[] param = new Object[]{ userName };
         try {
             orderLists = new QueryRunner(super.getDataSource()).query(
@@ -39,13 +41,14 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection();
+        super.closeConnection( conn );
         return orderLists;
     }
 
     @Override
     public int add ( OrderList orderList ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[]{
                 orderList.getOrderId(),
                 orderList.getOrderDate()+"",
@@ -66,13 +69,14 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection();
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int remove ( OrderList orderList ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[]{
                 orderList.getOrderId(),
                 orderList.getOrderDate()+"",
@@ -88,13 +92,14 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection();
+        super.closeConnection( conn );
         return count;
     }
 
     @Override
     public int modify ( OrderList orderList ) {
         int count = 0;
+        Connection conn = super.getConnection();
         Object[] param = new Object[]{
                 orderList.getCounter()+"",
                 orderList.getRelativeName(),
@@ -115,10 +120,8 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        super.closeConnection();
+        super.closeConnection( conn );
         return count;
     }
-
-
 
 }
