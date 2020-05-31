@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsDao {
     private String FINDAll = "select * from goods;";
-    private String FINDBy_goodsName = "select * from goods where goodsName like  '%'|| ? ||'%'";
+    private String FINDBy_goodsName = "select * from goods where goodsName like ?;";
     private String FINDBy_goodsClassification = "select * from goods where goodsClassification=?;";
     private String ADD = "insert into goods values(?,?,?,?,?,?,?,?);";
     private String REMOVE = "delete from goods where goodsNumber=?;";
@@ -33,6 +33,7 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         Object[] param = new Object[] { };
         try {
             list = new QueryRunner(super.getDataSource()).query(
+//                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     super.getConnection(),
                     FINDAll,
                     new BeanListHandler<>(Goods.class),
@@ -49,7 +50,7 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         List<Goods> list = new ArrayList<>( );
         Connection conn = super.getConnection();
         Object[] param = new Object[] {
-                goodsName
+                "%"+goodsName+"%"
         };
         try {
             list = new QueryRunner(super.getDataSource()).query(
