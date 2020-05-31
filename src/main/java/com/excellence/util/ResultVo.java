@@ -64,7 +64,7 @@ public class ResultVo {
     public void setData ( Object data ) {
         String data_json = null;
         try {
-            data_json = new ObjectMapper( ).writeValueAsString( data_json );
+            data_json = new ObjectMapper( ).writeValueAsString( data );
         } catch ( JsonProcessingException e ) {
             e.printStackTrace( );
         }
