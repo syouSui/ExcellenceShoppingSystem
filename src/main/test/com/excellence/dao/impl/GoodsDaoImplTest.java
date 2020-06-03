@@ -35,6 +35,9 @@ public class GoodsDaoImplTest {
     @Test
     public void testFindAllGoods ( ) throws Exception {
         goodsList = goodsDao.findAllGoods( 1,2 );
+
+        System.out.println( goodsDao.count_findBy_classificationId( "1" ) );
+        System.out.println( goodsDao.count_findBy_goodsName( "l" ) );
     }
 
     /**

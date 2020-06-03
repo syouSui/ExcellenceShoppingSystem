@@ -22,6 +22,8 @@ import java.util.List;
 public interface OrderListDao {
     public List<OrderList> findBy_userName ( String userName, int currentPage, int pageSize );
 
+    public int count_findBy_userName ( String userName );
+
     public int add ( OrderList orderList );
 
     public int remove ( OrderList orderList );

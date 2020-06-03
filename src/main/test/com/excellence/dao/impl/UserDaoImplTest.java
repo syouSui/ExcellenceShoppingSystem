@@ -50,6 +50,7 @@ public class UserDaoImplTest {
     @Test
     public void testFindAllUser ( ) throws Exception {
         show( );
+        System.out.println( userDao.count_findAllUser() );
     }
 
     /**

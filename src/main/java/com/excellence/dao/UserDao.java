@@ -22,6 +22,8 @@ public interface UserDao {
 
     public List<User> findAllUser ( int currentPage, int pageSize );
 
+    public int count_findAllUser ( );
+
     public User findBy_userName_userPassword ( String userName, String userPassword );
 
     public User findBy_userEmail_userPassword ( String userEmail, String userPassword );

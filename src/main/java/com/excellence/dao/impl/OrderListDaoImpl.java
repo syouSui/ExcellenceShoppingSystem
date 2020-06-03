@@ -4,6 +4,7 @@ import com.excellence.dao.OrderListDao;
 import com.excellence.model.OrderList;
 import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.Connection;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     private String selectSQL= "select * from order_list where 1=1 ";
+    private String countSQL = "select count(*) from order_list where 1=1 ";
     private String select_userName = "and userName = ? ";
     private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?)";
     private String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
@@ -46,6 +48,25 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         }
         super.closeConnection( conn );
         return orderLists;
+    }
+
+    @Override
+    public int count_findBy_userName ( String userName ) {
+        Long count = 0L;
+        Object[] param = new Object[] { userName  };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long)new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    countSQL+ select_userName,
+                    new ArrayHandler( ),
+                    param
+            )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return count.intValue();
     }
 
     @Override

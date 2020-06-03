@@ -22,6 +22,8 @@ import java.util.List;
 public interface UserInformationDao {
     public List<UserInformation> findBy_userName ( String userName, int currentPage, int pageSize );
 
+    public int count_findBy_userName ( String userName );
+
 //    public List<UserInformation> findBy_userName_userPassword(String userName);
 
     public int add ( UserInformation userInformation );

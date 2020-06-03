@@ -22,9 +22,13 @@ import java.util.List;
 public interface GoodsClassificationDao {
     public List<GoodsClassification> findAllGoodsClassification ( int currentPage, int pageSize );
 
-    public GoodsClassification findBy_lassificationId ( String classificationId );
+    public int count_findAllGoodsClassification();
+
+    public GoodsClassification findBy_classificationId ( String classificationId );
 
     public List<GoodsClassification> findBy_classificationName ( String classificationName, int currentPage, int pageSize );
+
+    public int count_findBy_classificationName( String classificationName );
 
     public int addGoodsClassification ( GoodsClassification classification );
 

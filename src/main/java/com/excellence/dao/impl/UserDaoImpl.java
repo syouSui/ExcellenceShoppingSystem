@@ -4,6 +4,7 @@ import com.excellence.dao.UserDao;
 import com.excellence.model.User;
 import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -20,13 +21,14 @@ import java.util.List;
  * @Description TODO
  */
 public class UserDaoImpl extends C3P0Utils implements UserDao {
-    String selectSQL = "select * from user where 1=1 ";
-    String select_userName = "and userName = ? ";
-    String select_userEmail = "and userEmail = ? ";
-    String select_userPassword = "and userPassword = ? ";
-    String insertSQL = "insert into user values(?,?,?,?,?,?,?)";
-    String modifySQL = "update user set userNickname = ?, userPassword = ?, role = ?, phone = ?, userEmail=? where userName = ?";
-    String removeSQL = "delete from user where userName = ?";
+    private String selectSQL = "select * from user where 1=1 ";
+    private String countSQL = "select count(*) from user where 1=1 ";
+    private String select_userName = "and userName = ? ";
+    private String select_userEmail = "and userEmail = ? ";
+    private String select_userPassword = "and userPassword = ? ";
+    private String insertSQL = "insert into user values(?,?,?,?,?,?,?)";
+    private String modifySQL = "update user set userNickname = ?, userPassword = ?, role = ?, phone = ?, userEmail=? where userName = ?";
+    private String removeSQL = "delete from user where userName = ?";
 
     final private int default_pageSize = 10;
 
@@ -48,6 +50,25 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         }
         super.closeConnection( conn );
         return list;
+    }
+
+    @Override
+    public int count_findAllUser ( ) {
+        Long count = 0L;
+        Object[] param = new Object[] {  };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long)new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    countSQL,
+                    new ArrayHandler( ),
+                    param
+            )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return count.intValue();
     }
 
     @Override

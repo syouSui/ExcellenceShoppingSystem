@@ -34,6 +34,8 @@ public class UserInformationDaoImplTest {
     @Test
     public void testFindBy_userName ( ) throws Exception {
         userInformationList = userInformationDao.findBy_userName( "lyx", 1, 100 );
+
+        System.out.println( userInformationDao.count_findBy_userName( "lyx" ));
     }
 
     /**

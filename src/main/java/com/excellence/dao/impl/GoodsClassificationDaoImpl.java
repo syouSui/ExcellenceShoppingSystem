@@ -4,6 +4,7 @@ import com.excellence.dao.GoodsClassificationDao;
 import com.excellence.model.GoodsClassification;
 import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -27,6 +28,7 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
     private String ADD = "insert into goods_classification values(?,?);";
     private String REMOVE = "delete from goods_classification where goodsClassification=?;";
     private String MODIFY = "update goods_classification set classificationName = ? where goodsClassification = ?;";
+    private String COUNT = "select count(*) from goods_classification where 1=1 ";
 
     final private int default_pageSize = 10;
 //    final private int default_pageSize = 2;
@@ -51,7 +53,24 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
     }
 
     @Override
-    public GoodsClassification findBy_lassificationId ( String classificationId ) {
+    public int count_findAllGoodsClassification ( ) {
+        Long count = 0L;
+        Object[] param = new Object[] { };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long) new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    COUNT,
+                    new ArrayHandler( ),
+                    param )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        return count.intValue( );
+    }
+
+    @Override
+    public GoodsClassification findBy_classificationId ( String classificationId ) {
         GoodsClassification goodsClassification = null;
         Connection conn = super.getConnection( );
         Object[] param = new Object[] { classificationId };
@@ -73,7 +92,7 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
         pageSize = pageSize == -1 ? default_pageSize : pageSize;
         List<GoodsClassification> list = new ArrayList<>( );
         Connection conn = super.getConnection( );
-        Object[] param = new Object[] { "%"+classificationName+"%" };
+        Object[] param = new Object[] { "%" + classificationName + "%" };
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
                     conn,
@@ -87,6 +106,24 @@ public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassi
         return list;
     }
 
+    @Override
+    public int count_findBy_classificationName ( String classificationName ) {
+        Long count = 0L;
+        Object[] param = new Object[] { "%"+classificationName+"%" };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long) new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    COUNT + FINDBy_classificationName,
+                    new ArrayHandler( ),
+                    param )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        return count.intValue( );
+    }
+
+    @Override
     public int addGoodsClassification ( GoodsClassification goodsClassification ) {
         int count = 0;
         Connection conn = super.getConnection( );

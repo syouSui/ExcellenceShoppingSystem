@@ -46,6 +46,7 @@ public class OrderListDaoImplTest {
                             o.getOrderDate( )
             );
         }
+        System.out.println( orderListDao.count_findBy_userName( "lyx" ) );
     }
 
     /**
@@ -56,7 +57,7 @@ public class OrderListDaoImplTest {
 
         orderListDao.add( new OrderList(
                 "12",
-                OrderList.getSystemDateString(),
+                OrderList.getSystemDateString( ),
                 "lyx",
                 "000988888",
                 66,
@@ -82,7 +83,7 @@ public class OrderListDaoImplTest {
                 "lyx_test",
                 "wfu",
                 "18888889999",
-                1)
+                1 )
         );
     }
 
@@ -100,7 +101,7 @@ public class OrderListDaoImplTest {
                 "lyx_test",
                 "wfu",
                 "-1",
-                1)
+                1 )
         );
     }
 

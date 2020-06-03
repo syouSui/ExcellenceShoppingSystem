@@ -44,6 +44,8 @@ public class GoodsClassificationDaoImplTest {
     @Test
     public void testFindAllGoodsClassification ( ) throws Exception {
         show( );
+        System.out.println( goodsClassificationDao.count_findAllGoodsClassification( ) );
+        System.out.println( goodsClassificationDao.count_findBy_classificationName( "e" ) );
     }
 
     /**
@@ -51,7 +53,7 @@ public class GoodsClassificationDaoImplTest {
      */
     @Test
     public void testFindClassification ( ) throws Exception {
-        GoodsClassification byClassificationId = goodsClassificationDao.findBy_lassificationId( "1" );
+        GoodsClassification byClassificationId = goodsClassificationDao.findBy_classificationId( "1" );
     }
 
     /**

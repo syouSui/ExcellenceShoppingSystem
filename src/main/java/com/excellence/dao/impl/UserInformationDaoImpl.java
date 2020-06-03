@@ -4,6 +4,7 @@ import com.excellence.dao.UserInformationDao;
 import com.excellence.model.UserInformation;
 import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.Connection;
@@ -19,11 +20,12 @@ import java.util.List;
  * @Description TODO
  */
 public class UserInformationDaoImpl extends C3P0Utils implements UserInformationDao {
-    String selectSQL = "select * from user_information where 1=1 ";
-    String select_userName = "and userName = ? ";
-    String modifySQL = "";
-    String insertSQL = "insert into user_information values(?,?,?,?)";
-    String removeSQL = "delete from user_information where userName = ? and relativeName = ? and address = ? and relativePhone = ? ";
+    private String selectSQL = "select * from user_information where 1=1 ";
+    private String select_userName = "and userName = ? ";
+    private String countSQL = "select count(*) from user_information where 1=1 ";
+    private String modifySQL = "";
+    private String insertSQL = "insert into user_information values(?,?,?,?)";
+    private String removeSQL = "delete from user_information where userName = ? and relativeName = ? and address = ? and relativePhone = ? ";
 
     final private int default_pageSize = 10;
 
@@ -45,6 +47,25 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
         }
         super.closeConnection( conn );
         return list;
+    }
+
+    @Override
+    public int count_findBy_userName ( String userName ) {
+        Long count = 0L;
+        Object[] param = new Object[] { userName };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long)new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    countSQL + select_userName,
+                    new ArrayHandler( ),
+                    param
+            )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return count.intValue();
     }
 
     @Override
