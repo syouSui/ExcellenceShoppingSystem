@@ -33,7 +33,7 @@ public class UserInformationDaoImplTest {
      */
     @Test
     public void testFindBy_userName ( ) throws Exception {
-        userInformationList = userInformationDao.findBy_userName( "lyx" );
+        userInformationList = userInformationDao.findBy_userName( "lyx", 1, 100 );
     }
 
     /**
