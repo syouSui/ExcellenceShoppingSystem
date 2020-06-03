@@ -23,7 +23,7 @@ public class UserDaoImplTest {
     static List<User> userList = new ArrayList( );
 
     public static void show ( ) {
-        userList = userDao.findAllUser( );
+        userList = userDao.findAllUser( 1, 100 );
         for ( User e : userList )
             System.out.println(
                     e.getUserName( ) + "\t" +
@@ -96,7 +96,8 @@ public class UserDaoImplTest {
                         "hhh",
                         0,
                         "111222333444",
-                        "1231231@1.com" )
+                        "1231231@1.com",
+                        "1.jpg")
         );
         userDao.modifyUser(
                 new User(
@@ -105,7 +106,8 @@ public class UserDaoImplTest {
                         "aaa",
                         0,
                         "888888888888888888",
-                        "8881@1.com" ),
+                        "8881@1.com",
+                        "1.jpg"),
                 "hhh"
         );
         userDao.removeUser( "hhh" );
@@ -133,7 +135,8 @@ public class UserDaoImplTest {
                         "aaa",
                         0,
                         "888888888888888888",
-                        "8881@1.com" ),
+                        "8881@1.com",
+                        "1.jpg"),
                 "hhh"
         );
         show( );

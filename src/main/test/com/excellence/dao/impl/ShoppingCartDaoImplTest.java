@@ -34,7 +34,7 @@ public class ShoppingCartDaoImplTest extends TestCase {
      */
     @Test
     public void testFindBy_userName ( ) throws Exception {
-        shoppingCartList = shoppingCartDao.findBy_userName( "lyx" );
+        shoppingCartList = shoppingCartDao.findBy_userName( "lyx",1,100 );
     }
 
     /**

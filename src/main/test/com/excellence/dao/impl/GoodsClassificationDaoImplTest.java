@@ -21,10 +21,10 @@ public class GoodsClassificationDaoImplTest {
     static List<GoodsClassification> goodsClassificationList = null;
 
     public static void show ( ) {
-        goodsClassificationList = goodsClassificationDao.findAllGoodsClassification( );
+        goodsClassificationList = goodsClassificationDao.findAllGoodsClassification( 1, 2 );
         for ( GoodsClassification e : goodsClassificationList )
             System.out.println(
-                    e.getGoodsClassification( ) + "\t" +
+                    e.getClassificationId( ) + "\t" +
                             e.getClassificationName( )
             );
         System.out.println( );
@@ -45,6 +45,23 @@ public class GoodsClassificationDaoImplTest {
     public void testFindAllGoodsClassification ( ) throws Exception {
         show( );
     }
+
+    /**
+     * Method: findClassification(String classification, int currentPage, int pageSize)
+     */
+    @Test
+    public void testFindClassification ( ) throws Exception {
+        GoodsClassification byClassificationId = goodsClassificationDao.findBy_lassificationId( "1" );
+    }
+
+    /**
+     * Method: findClassificationName(String classificationName, int currentPage, int pageSize)
+     */
+    @Test
+    public void testFindClassificationName ( ) throws Exception {
+        List<GoodsClassification> e = goodsClassificationDao.findBy_classificationName( "e", 1, 100 );
+    }
+
 
     /**
      * Method: addGoodsClassification(GoodsClassification goodsClassification)
@@ -73,8 +90,8 @@ public class GoodsClassificationDaoImplTest {
     @Test
     public void testModifyGoodsClassification ( ) throws Exception {
         goodsClassificationDao.modifyGoodsClassification( new GoodsClassification(
-                "4",
-                "d" ),
+                        "4",
+                        "d" ),
                 "hhhhhh"
         );
         show( );

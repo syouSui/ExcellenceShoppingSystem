@@ -24,6 +24,8 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
     private String REMOVE = "delete from head_picture where pictureAddress=?;";
     private String MODIFY = "update head_picture set pictureAddress=? where pictureAddress=?;";
 
+    final private int default_pageSize = 10;
+
     @Override
     public List<HeadPicture> findAll ( ) {
         List<HeadPicture> list = null;
@@ -31,7 +33,7 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         Object[] param = new Object[] { };
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
-                    super.getConnection( ),
+                    conn,
                     FIND,
                     new BeanListHandler<>( HeadPicture.class ),
                     param
@@ -52,7 +54,7 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     ADD,
                     param
             );
@@ -72,7 +74,7 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     REMOVE,
                     param
             );
@@ -92,7 +94,7 @@ public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     MODIFY,
                     param
             );

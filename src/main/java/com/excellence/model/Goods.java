@@ -10,7 +10,7 @@ package com.excellence.model;
 public class Goods {
     private String goodsNumber;
     private String goodsPictureTop;
-    private String goodsClassification;
+    private String classificationId;
     private String goodsName;
     private float priceOrigin;
     private float priceSale;
@@ -21,10 +21,10 @@ public class Goods {
 
     }
 
-    public Goods(String goodsNumber, String goodsPictureTop, String goodsClassification, String goodsName, float priceOrigin, float priceSale, int counter, String goodPicture) {
+    public Goods(String goodsNumber, String goodsPictureTop, String classificationId, String goodsName, float priceOrigin, float priceSale, int counter, String goodPicture) {
         this.goodsNumber = goodsNumber;
         this.goodsPictureTop = goodsPictureTop;
-        this.goodsClassification = goodsClassification;
+        this.classificationId = classificationId;
         this.goodsName = goodsName;
         this.priceOrigin = priceOrigin;
         this.priceSale = priceSale;
@@ -48,12 +48,12 @@ public class Goods {
         this.goodsPictureTop = goodsPictureTop;
     }
 
-    public String getGoodsClassification() {
-        return goodsClassification;
+    public String getClassificationId () {
+        return classificationId;
     }
 
-    public void setGoodsClassification(String goodsClassification) {
-        this.goodsClassification = goodsClassification;
+    public void setClassificationId ( String classificationId ) {
+        this.classificationId = classificationId;
     }
 
     public String getGoodsName() {

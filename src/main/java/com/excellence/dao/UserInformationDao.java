@@ -20,7 +20,7 @@ import java.util.List;
  * modify
  */
 public interface UserInformationDao {
-    public List<UserInformation> findBy_userName(String userName);
+    public List<UserInformation> findBy_userName ( String userName, int currentPage, int pageSize );
 
 //    public List<UserInformation> findBy_userName_userPassword(String userName);
 
@@ -28,5 +28,5 @@ public interface UserInformationDao {
 
     public int remove ( UserInformation userInformation );
 
-    public int[] modify ( UserInformation from, UserInformation to);
+    public int[] modify ( UserInformation from, UserInformation to );
 }

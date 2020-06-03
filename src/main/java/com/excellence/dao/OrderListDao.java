@@ -20,7 +20,7 @@ import java.util.List;
  * modify
  */
 public interface OrderListDao {
-    public List<OrderList> findBy_userName( String userName);
+    public List<OrderList> findBy_userName ( String userName, int currentPage, int pageSize );
 
     public int add ( OrderList orderList );
 

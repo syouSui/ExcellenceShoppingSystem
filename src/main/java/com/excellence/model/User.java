@@ -17,18 +17,21 @@ public class User implements Serializable {
     private int role;
     private String phone;
     private String userEmail;
+    private String userPicture;
 
     public User ( ) {
     }
 
-    public User ( String userName, String userNickname, String userPassword, int role, String phone, String usrEmail ) {
+    public User ( String userName, String userNickname, String userPassword, int role, String phone, String usrEmail, String userPicture ) {
         this.userName = userName;
         this.userNickname = userNickname;
         this.userPassword = userPassword;
         this.role = role;
         this.phone = phone;
         this.userEmail = usrEmail;
+        this.userPicture = userPicture;
     }
+
     public String getUserName ( ) {
         return userName;
     }
@@ -62,7 +65,13 @@ public class User implements Serializable {
     public String getUserEmail ( ) {
         return userEmail;
     }
-    public void setUsrEmail ( String userEmail ) {
+    public void setUserEmail ( String userEmail ) {
         this.userEmail = userEmail;
+    }
+    public String getUserPicture ( ) {
+        return userPicture;
+    }
+    public void setUserPicture ( String userPicture ) {
+        this.userPicture = userPicture;
     }
 }

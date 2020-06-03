@@ -20,12 +20,16 @@ import java.util.List;
  * modify
  */
 public interface GoodsClassificationDao {
-    public List<GoodsClassification> findAllGoodsClassification ( );
+    public List<GoodsClassification> findAllGoodsClassification ( int currentPage, int pageSize );
 
-    public int addGoodsClassification ( GoodsClassification goodsClassification );
+    public GoodsClassification findBy_lassificationId ( String classificationId );
 
-    public int removeGoodsClassification ( String goodsClassification );
+    public List<GoodsClassification> findBy_classificationName ( String classificationName, int currentPage, int pageSize );
 
-    public int modifyGoodsClassification ( GoodsClassification goodsClassification, String goodsClassificationName );
+    public int addGoodsClassification ( GoodsClassification classification );
+
+    public int removeGoodsClassification ( String classificationId );
+
+    public int modifyGoodsClassification ( GoodsClassification classificationId, String classificationName );
 
 }

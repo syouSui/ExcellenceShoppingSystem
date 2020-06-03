@@ -24,19 +24,22 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     String select_userName = "and userName = ? ";
     String select_userEmail = "and userEmail = ? ";
     String select_userPassword = "and userPassword = ? ";
-    String insertSQL = "insert into user values(?,?,?,?,?,?)";
+    String insertSQL = "insert into user values(?,?,?,?,?,?,?)";
     String modifySQL = "update user set userNickname = ?, userPassword = ?, role = ?, phone = ?, userEmail=? where userName = ?";
     String removeSQL = "delete from user where userName = ?";
 
+    final private int default_pageSize = 10;
+
     @Override
-    public List<User> findAllUser ( ) {
+    public List<User> findAllUser ( int currentPage, int pageSize ) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
         List<User> list = null;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] { };
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
-                    super.getConnection( ),
-                    selectSQL,
+                    conn,
+                    selectSQL + "limit " + (currentPage - 1) * pageSize + ", " + pageSize,
                     new BeanListHandler<>( User.class ),
                     param
             );
@@ -50,11 +53,11 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     @Override
     public User findBy_userName_userPassword ( String userName, String userPassword ) {
         User user = null;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] { userName, userPassword };
         try {
             user = new QueryRunner( super.getDataSource( ) ).query(
-                    super.getConnection( ),
+                    conn,
                     selectSQL + select_userName + select_userPassword,
                     new BeanHandler<>( User.class ),
                     param
@@ -69,11 +72,11 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     @Override
     public User findBy_userEmail_userPassword ( String userEmail, String userPassword ) {
         User user = null;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] { userEmail, userPassword };
         try {
             user = new QueryRunner( super.getDataSource( ) ).query(
-                    super.getConnection( ),
+                    conn,
                     selectSQL + select_userEmail + select_userPassword,
                     new BeanHandler<>( User.class ),
                     param
@@ -88,18 +91,19 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     @Override
     public int addUser ( User user ) {
         int count = 0;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 user.getUserName( ),
                 user.getUserNickname( ),
                 user.getUserPassword( ),
                 user.getRole( ) + "",
                 user.getPhone( ),
-                user.getUserEmail( )
+                user.getUserEmail( ),
+                user.getUserPicture( ),
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     insertSQL,
                     param
             );
@@ -113,13 +117,13 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     @Override
     public int removeUser ( String userName ) {
         int count = 0;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 userName
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     removeSQL,
                     param
             );
@@ -133,18 +137,19 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     @Override
     public int modifyUser ( User user, String userName ) {
         int count = 0;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 user.getUserNickname( ),
                 user.getUserPassword( ),
                 user.getRole( ) + "",
                 user.getPhone( ),
                 user.getUserEmail( ),
+                user.getUserPicture( ),
                 userName
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     modifySQL,
                     param
             );

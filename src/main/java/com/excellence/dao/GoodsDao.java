@@ -19,11 +19,12 @@ import java.util.List;
  * modify
  */
 public interface GoodsDao {
-    public List<Goods> findAllGoods ( );
+    public List<Goods> findAllGoods ( int currentPage, int pageSize );
 
-    public List<Goods> findBy_goodsName( String goodsName );
+    public List<Goods> findBy_goodsName ( String goodsName, int currentPage, int pageSize );
 
-    public List<Goods> findBy_goodsClassification(String goodsClassification );
+    public List<Goods> findBy_classificationId ( String classificationId, int currentPage, int pageSize );
+
 
     public int addGoods ( Goods goods );
 

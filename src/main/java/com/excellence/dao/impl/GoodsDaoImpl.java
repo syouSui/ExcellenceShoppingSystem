@@ -19,79 +19,86 @@ import java.util.List;
  * @Description TODO
  */
 public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsDao {
-    private String FINDAll = "select * from goods;";
-    private String FINDBy_goodsName = "select * from goods where goodsName like ?;";
-    private String FINDBy_goodsClassification = "select * from goods where goodsClassification=?;";
+    private String FINDAll = "select * from goods ";
+    private String FINDBy_goodsName = "select * from goods where goodsName like ?";
+    private String FINDBy_classificationId = "select * from goods where classificationId=? ";
     private String ADD = "insert into goods values(?,?,?,?,?,?,?,?);";
     private String REMOVE = "delete from goods where goodsNumber=?;";
     private String MODIFY = "update goods as g set g.goodsPictureTop=?, g.goodsClassification=?, g.goodsName=?, g.priceOrigin=?, g.priceSale=?, g.counter=?, g.goodsPicture=? where g.goodsNumber=?;";
 
+    final private int default_pageSize = 10;
+    // 1: (目的页数-1)*显示条数        2: 显示条数
+
     @Override
-    public List<Goods> findAllGoods ( ) {
+    public List<Goods> findAllGoods ( int currentPage, int pageSize ) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
         List<Goods> list = new ArrayList<>( );
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] { };
         try {
-            list = new QueryRunner(super.getDataSource()).query(
-//                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                    super.getConnection(),
-                    FINDAll,
-                    new BeanListHandler<>(Goods.class),
+            list = new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    FINDAll + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
+                    new BeanListHandler<>( Goods.class ),
                     param
             );
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
         super.closeConnection( conn );
         return list;
     }
+
     @Override
-    public List<Goods> findBy_goodsName ( String goodsName ) {
+    public List<Goods> findBy_goodsName ( String goodsName, int currentPage, int pageSize ) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
         List<Goods> list = new ArrayList<>( );
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
-                "%"+goodsName+"%"
+                "%" + goodsName + "%"
         };
         try {
-            list = new QueryRunner(super.getDataSource()).query(
-                    super.getConnection(),
-                    FINDBy_goodsName,
-                    new BeanListHandler<>(Goods.class),
+            list = new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    FINDBy_goodsName + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
+                    new BeanListHandler<>( Goods.class ),
                     param
             );
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
         super.closeConnection( conn );
         return list;
     }
+
     @Override
-    public List<Goods> findBy_goodsClassification ( String goodsClassification ) {
+    public List<Goods> findBy_classificationId ( String classificationId, int currentPage, int pageSize ) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
         List<Goods> list = new ArrayList<>( );
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
-                goodsClassification
+                classificationId
         };
         try {
-            list = new QueryRunner(super.getDataSource()).query(
-                    super.getConnection(),
-                    FINDBy_goodsClassification,
-                    new BeanListHandler<>(Goods.class),
+            list = new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    FINDBy_classificationId + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
+                    new BeanListHandler<>( Goods.class ),
                     param
             );
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
         super.closeConnection( conn );
         return list;
     }
     @Override
     public int addGoods ( Goods goods ) {
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 goods.getGoodsNumber( ),
                 goods.getGoodsPictureTop( ),
-                goods.getGoodsClassification( ),
+                goods.getClassificationId( ),
                 goods.getGoodsName( ),
                 goods.getPriceOrigin( ) + "",
                 goods.getPriceSale( ) + "",
@@ -100,13 +107,13 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         };
         int count = 0;
         try {
-            count = new QueryRunner(super.getDataSource()).update(
-                    super.getConnection(),
+            count = new QueryRunner( super.getDataSource( ) ).update(
+                    super.getConnection( ),
                     ADD,
                     param
             );
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
         super.closeConnection( conn );
         return count;
@@ -114,18 +121,18 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
     @Override
     public int removeGoods ( String goodsNumber ) {
         int count = 0;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 goodsNumber
         };
         try {
-            count = new QueryRunner(super.getDataSource()).update(
-                    super.getConnection(),
+            count = new QueryRunner( super.getDataSource( ) ).update(
+                    super.getConnection( ),
                     REMOVE,
                     param
             );
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
         super.closeConnection( conn );
         return count;
@@ -133,10 +140,10 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
     @Override
     public int modifyGoods ( Goods goods, String goodsNumber ) {
         int count = 0;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 goods.getGoodsPictureTop( ),
-                goods.getGoodsClassification( ),
+                goods.getClassificationId( ),
                 goods.getGoodsName( ),
                 goods.getPriceOrigin( ) + "",
                 goods.getPriceSale( ) + "",
@@ -145,13 +152,13 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
                 goodsNumber
         };
         try {
-            count = new QueryRunner(super.getDataSource()).update(
-                    super.getConnection(),
+            count = new QueryRunner( super.getDataSource( ) ).update(
+                    conn,
                     MODIFY,
                     param
             );
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
         }
         super.closeConnection( conn );
         return count;

@@ -20,7 +20,7 @@ import java.util.List;
  * modify
  */
 public interface ShoppingCartDao {
-    public List<ShoppingCart> findBy_userName( String userName);
+    public List<ShoppingCart> findBy_userName ( String userName, int currentPage, int pageSize );
 
     public int add ( ShoppingCart shoppingCart );
 

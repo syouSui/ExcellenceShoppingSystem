@@ -73,7 +73,7 @@ public class JacksonTest {
         new ResultVo(
                 ResultVo.CODE_SUCCESS,
                 "yes",
-                userDao.findAllUser( )
+                userDao.findAllUser( 1,100 )
         ).toJSON();
 
 

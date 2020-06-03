@@ -25,16 +25,18 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
     String insertSQL = "insert into user_information values(?,?,?,?)";
     String removeSQL = "delete from user_information where userName = ? and relativeName = ? and address = ? and relativePhone = ? ";
 
+    final private int default_pageSize = 10;
 
     @Override
-    public List<UserInformation> findBy_userName ( String userName ) {
+    public List<UserInformation> findBy_userName ( String userName, int currentPage, int pageSize ) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
         Object[] param = new Object[] { userName };
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         List<UserInformation> list = null;
         try {
             list = new QueryRunner( super.getDataSource( ) ).query(
-                    super.getConnection( ),
-                    selectSQL + select_userName,
+                    conn,
+                    selectSQL + select_userName + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
                     new BeanListHandler<>( UserInformation.class ),
                     param
             );
@@ -48,7 +50,7 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
     @Override
     public int add ( UserInformation userInformation ) {
         int count = 0;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 userInformation.getUserName( ),
                 userInformation.getRelativeName( ),
@@ -57,7 +59,7 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     insertSQL,
                     param
             );
@@ -71,7 +73,7 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
     @Override
     public int remove ( UserInformation userInformation ) {
         int count = 0;
-        Connection conn = super.getConnection();
+        Connection conn = super.getConnection( );
         Object[] param = new Object[] {
                 userInformation.getUserName( ),
                 userInformation.getRelativeName( ),
@@ -80,7 +82,7 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(
-                    super.getConnection( ),
+                    conn,
                     removeSQL,
                     param
             );
@@ -93,11 +95,9 @@ public class UserInformationDaoImpl extends C3P0Utils implements UserInformation
 
     @Override
     public int[] modify ( UserInformation from, UserInformation to ) {
-        Connection conn = super.getConnection();
         int[] count = new int[] { 0, 0 };
         count[0] = remove( from );
         count[1] = add( to );
-        super.closeConnection( conn );
         return count;
     }
 

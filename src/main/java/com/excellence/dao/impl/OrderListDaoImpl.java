@@ -26,15 +26,18 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     private String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
     private String modifySQL = "update order_list set counter = ?,relativeName = ?, address = ?, relativePhone = ?, orderStatus = ? where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
 
+    final private int default_pageSize = 10;
+
     @Override
-    public List<OrderList> findBy_userName ( String userName ) {
+    public List<OrderList> findBy_userName ( String userName, int currentPage, int pageSize) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
         List<OrderList> orderLists =new ArrayList<>();
         Connection conn = super.getConnection();
         Object[] param = new Object[]{ userName };
         try {
             orderLists = new QueryRunner(super.getDataSource()).query(
-                    super.getConnection(),
-                    selectSQL+select_userName,
+                    conn,
+                    selectSQL+select_userName + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
                     new BeanListHandler<>(OrderList.class),
                     param
             );
@@ -62,7 +65,7 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         };
         try {
             count = new QueryRunner(super.getDataSource()).update(
-                    super.getConnection(),
+                    conn,
                     insertSQL,
                     param
             );
@@ -85,7 +88,7 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         };
         try {
             count = new QueryRunner(super.getDataSource()).update(
-                    super.getConnection(),
+                    conn,
                     removeSQL,
                     param
             );
@@ -113,7 +116,7 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         };
         try {
             count = new QueryRunner(super.getDataSource()).update(
-                    super.getConnection(),
+                    conn,
                     modifySQL,
                     param
             );

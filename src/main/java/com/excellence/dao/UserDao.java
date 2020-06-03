@@ -20,16 +20,16 @@ import java.util.List;
  */
 public interface UserDao {
 
-    public List<User> findAllUser();
+    public List<User> findAllUser ( int currentPage, int pageSize );
 
-    public User findBy_userName_userPassword(String userName,String userPassword);
+    public User findBy_userName_userPassword ( String userName, String userPassword );
 
-    public User findBy_userEmail_userPassword(String userEmail,String userPassword);
+    public User findBy_userEmail_userPassword ( String userEmail, String userPassword );
 
-    public int addUser(User user);
+    public int addUser ( User user );
 
-    public int removeUser(String userName );
+    public int removeUser ( String userName );
 
-    public int modifyUser(User user,String userName);
+    public int modifyUser ( User user, String userName );
 
 }

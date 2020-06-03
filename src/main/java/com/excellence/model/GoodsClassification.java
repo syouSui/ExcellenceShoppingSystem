@@ -9,23 +9,23 @@ package com.excellence.model;
  *********************************************************************************/
 
 public class GoodsClassification {
-    private String goodsClassification;
+    private String classificationId;
     private String classificationName;
 
     public GoodsClassification ( ) {
     }
 
-    public GoodsClassification(String goodsClassification, String classificationName) {
-        this.goodsClassification = goodsClassification;
+    public GoodsClassification(String classificationId, String classificationName) {
+        this.classificationId = classificationId;
         this.classificationName = classificationName;
     }
 
-    public String getGoodsClassification() {
-        return goodsClassification;
+    public String getClassificationId () {
+        return classificationId;
     }
 
-    public void setGoodsClassification(String goodsClassification) {
-        this.goodsClassification = goodsClassification;
+    public void setClassificationId ( String classificationId ) {
+        this.classificationId = classificationId;
     }
 
     public String getClassificationName() {

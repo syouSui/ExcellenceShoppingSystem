@@ -1,7 +1,6 @@
 package com.excellence.dao.impl;
 
 import com.excellence.dao.GoodsDao;
-import com.excellence.dao.impl.GoodsDaoImpl;
 import com.excellence.model.Goods;
 import org.junit.Test;
 import org.junit.Before;
@@ -35,7 +34,7 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testFindAllGoods ( ) throws Exception {
-        goodsList = goodsDao.findAllGoods( );
+        goodsList = goodsDao.findAllGoods( 1,2 );
     }
 
     /**
@@ -43,7 +42,7 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testFindBy_goodsName ( ) throws Exception {
-        goodsList = goodsDao.findBy_goodsName( "pp" );
+        goodsList = goodsDao.findBy_goodsName( "pp", 1, 100 );
     }
 
     /**
@@ -51,7 +50,7 @@ public class GoodsDaoImplTest {
      */
     @Test
     public void testFindBy_goodsClassification ( ) throws Exception {
-        goodsList = goodsDao.findBy_goodsClassification( "1" );
+        goodsList = goodsDao.findBy_classificationId( "1", 1,100 );
     }
 
     /**

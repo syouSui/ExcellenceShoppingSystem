@@ -38,7 +38,7 @@ public class OrderListDaoImplTest {
      */
     @Test
     public void testFindBy_userName ( ) throws Exception {
-        orderLists = orderListDao.findBy_userName( "lyx" );
+        orderLists = orderListDao.findBy_userName( "lyx", 1, 100 );
         for ( OrderList o : orderLists ) {
             System.out.println(
                     o.getAddress( ) + "\t" +
