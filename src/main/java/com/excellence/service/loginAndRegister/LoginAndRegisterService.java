@@ -20,10 +20,11 @@ import java.io.IOException;
  */
 public class LoginAndRegisterService {
     static UserDao userDao = new UserDaoImpl( );
+
     public void login ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         User user = null;
         user = userDao.findBy_userName_userPassword( request.getParameter( "userName" ), request.getParameter( "userPassword" ) );
-        if ( user != null )
+        if ( user == null )
             response.getWriter( ).println( new ResultVo( ResultVo.CODE_FAILED, "failed", user ).toJSON( ) );
         else response.getWriter( ).println( new ResultVo( ResultVo.CODE_SUCCESS, "success", user ).toJSON( ) );
         System.out.println( "login" );

@@ -1,6 +1,7 @@
 package com.excellence.controller.shopAdministrator;
 
-import com.excellence.service.shopAdministrator.statistics.ShopAdministratorService;
+
+import com.excellence.service.shopAdministrator.ShopAdministratorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -16,12 +16,14 @@ public class Goods {
     private float priceSale;
     private int counter;
     private String goodPicture;
+    private String storeId;
 
     public Goods () {
 
     }
 
-    public Goods(String goodsNumber, String goodsPictureTop, String classificationId, String goodsName, float priceOrigin, float priceSale, int counter, String goodPicture) {
+
+    public Goods( String goodsNumber, String goodsPictureTop, String classificationId, String goodsName, float priceOrigin, float priceSale, int counter, String goodPicture, String storeId) {
         this.goodsNumber = goodsNumber;
         this.goodsPictureTop = goodsPictureTop;
         this.classificationId = classificationId;
@@ -30,6 +32,7 @@ public class Goods {
         this.priceSale = priceSale;
         this.counter = counter;
         this.goodPicture = goodPicture;
+        this.storeId = storeId;
     }
 
     public String getGoodsNumber() {
@@ -94,5 +97,13 @@ public class Goods {
 
     public void setGoodPicture(String goodPicture) {
         this.goodPicture = goodPicture;
+    }
+
+    public String getStoreId ( ) {
+        return storeId;
+    }
+
+    public void setStoreId ( String storeId ) {
+        this.storeId = storeId;
     }
 }

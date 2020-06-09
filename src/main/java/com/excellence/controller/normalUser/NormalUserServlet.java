@@ -1,7 +1,6 @@
 package com.excellence.controller.normalUser;
 
-import com.excellence.service.loginAndRegister.LoginAndRegisterService;
-import com.excellence.service.normalUser.trolley.NormalUserService;
+import com.excellence.service.normalUser.NormalUserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
