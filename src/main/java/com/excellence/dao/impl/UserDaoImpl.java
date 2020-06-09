@@ -33,6 +33,45 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     final private int default_pageSize = 10;
 
     @Override
+    public User findBy_userName ( String userName ) {
+        User user = null;
+        Connection conn = super.getConnection( );
+        Object[] param = new Object[] { userName };
+        try {
+            user = new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    selectSQL + select_userName,
+                    new BeanHandler<>( User.class ),
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return user;
+    }
+
+    @Override
+    public User findBy_userEmail ( String userEmail ) {
+        User user = null;
+        Connection conn = super.getConnection( );
+        Object[] param = new Object[] { userEmail };
+        try {
+            user = new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    selectSQL + select_userEmail,
+                    new BeanHandler<>( User.class ),
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return user;
+
+    }
+
+    @Override
     public List<User> findAllUser ( int currentPage, int pageSize ) {
         pageSize = pageSize == -1 ? default_pageSize : pageSize;
         List<User> list = null;
@@ -55,10 +94,10 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
     @Override
     public int count_findAllUser ( ) {
         Long count = 0L;
-        Object[] param = new Object[] {  };
+        Object[] param = new Object[] { };
         Connection conn = super.getConnection( );
         try {
-            count = (Long)new QueryRunner( super.getDataSource( ) ).query(
+            count = (Long) new QueryRunner( super.getDataSource( ) ).query(
                     conn,
                     countSQL,
                     new ArrayHandler( ),
@@ -68,7 +107,7 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
             throwables.printStackTrace( );
         }
         super.closeConnection( conn );
-        return count.intValue();
+        return count.intValue( );
     }
 
     @Override

@@ -20,6 +20,10 @@ import java.util.List;
  */
 public interface UserDao {
 
+    public User findBy_userName ( String userName );
+
+    public User findBy_userEmail ( String userEmail );
+
     public List<User> findAllUser ( int currentPage, int pageSize );
 
     public int count_findAllUser ( );

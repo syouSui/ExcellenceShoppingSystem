@@ -4,6 +4,7 @@ import com.excellence.model.Goods;
 import com.excellence.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.Connection;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsDao {
     private String FINDAll = "select * from goods ";
+    private String FINDBy_goodsNumber = " and goodsNumber = ? ";
     private String FINDBy_goodsName = " and goodsName like ?";
     private String FINDBy_classificationId = " and classificationId=? ";
     private String ADD = "insert into goods values(?,?,?,?,?,?,?,?);";
@@ -31,6 +33,26 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
     final private int default_pageSize = 10;
     // 1: (目的页数-1)*显示条数        2: 显示条数
 
+    @Override
+    public Goods findBy_goodsNumber ( String goodsNumber ) {
+        Goods goods = null;
+        Connection conn = super.getConnection( );
+        Object[] param = new Object[] {
+                goodsNumber
+        };
+        try {
+            goods = new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    FINDAll + FINDBy_goodsNumber,
+                    new BeanHandler<>( Goods.class ),
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return goods;
+    }
     @Override
     public List<Goods> findAllGoods ( int currentPage, int pageSize ) {
         pageSize = pageSize == -1 ? default_pageSize : pageSize;
