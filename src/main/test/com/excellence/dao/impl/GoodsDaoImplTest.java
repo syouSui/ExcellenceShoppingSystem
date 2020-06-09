@@ -69,7 +69,8 @@ public class GoodsDaoImplTest {
                         (float) 8.8,
                         (float) 8,
                         10,
-                        "8.jpg"
+                        "8.jpg",
+                "1"
                 )
         );
     }
@@ -96,7 +97,8 @@ public class GoodsDaoImplTest {
                         (float) 8.8,
                         (float) 8,
                         9999,
-                        "8.jpg"
+                        "8.jpg",
+                        "1"
                 ),
                 "88"
         );
