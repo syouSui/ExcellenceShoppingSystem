@@ -79,7 +79,7 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         try {
             user = new QueryRunner( super.getDataSource( ) ).query(
                     conn,
-                    selectSQL + select_userName + select_userPassword,
+                    "select userName, userNickname, role, phone, userEmail, userPicture" + select_userName + select_userPassword,
                     new BeanHandler<>( User.class ),
                     param
             );
@@ -98,7 +98,7 @@ public class UserDaoImpl extends C3P0Utils implements UserDao {
         try {
             user = new QueryRunner( super.getDataSource( ) ).query(
                     conn,
-                    selectSQL + select_userEmail + select_userPassword,
+                    "select userName, userNickname, role, phone, userEmail, userPicture" + select_userEmail + select_userPassword,
                     new BeanHandler<>( User.class ),
                     param
             );
