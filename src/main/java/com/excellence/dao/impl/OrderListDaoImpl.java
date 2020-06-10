@@ -24,11 +24,31 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     private String selectSQL= "select * from order_list where 1=1 ";
     private String countSQL = "select count(*) from order_list where 1=1 ";
     private String select_userName = "and userName = ? ";
-    private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?)";
+    private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?,?)";
     private String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
     private String modifySQL = "update order_list set counter = ?,relativeName = ?, address = ?, relativePhone = ?, orderStatus = ? where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
 
     final private int default_pageSize = 10;
+
+    @Override
+    public List<OrderList> findAll ( int currentPage, int pageSize ) {
+        return null;
+    }
+
+    @Override
+    public int count_findAll ( String userName ) {
+        return 0;
+    }
+
+    @Override
+    public List<OrderList> findBy_storeId ( String storeId, int currentPage, int pageSize ) {
+        return null;
+    }
+
+    @Override
+    public int count_findBy_storeId ( String userName ) {
+        return 0;
+    }
 
     @Override
     public List<OrderList> findBy_userName ( String userName, int currentPage, int pageSize) {
@@ -82,7 +102,8 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
                 orderList.getRelativeName(),
                 orderList.getAddress(),
                 orderList.getRelativePhone(),
-                orderList.getOrderStatus()+""
+                orderList.getOrderStatus()+"",
+                orderList.getStoreId()
         };
         try {
             count = new QueryRunner(super.getDataSource()).update(

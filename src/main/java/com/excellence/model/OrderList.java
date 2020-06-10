@@ -22,11 +22,12 @@ public class OrderList implements Serializable {
     private String address;
     private String relativePhone;
     private int orderStatus;
+    private String storeId;
 
     public OrderList ( ) {
     }
 
-    public OrderList ( String orderId, String orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone, int orderStatus ) {
+    public OrderList ( String orderId, String orderDate, String userName, String goodsNumber, int counter, String relativeName, String address, String relativePhone, int orderStatus, String storeId ) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.userName = userName;
@@ -36,8 +37,8 @@ public class OrderList implements Serializable {
         this.address = address;
         this.relativePhone = relativePhone;
         this.orderStatus = orderStatus;
+        this.storeId = storeId;
     }
-
     public String getOrderId ( ) {
         return orderId;
     }
@@ -116,5 +117,10 @@ public class OrderList implements Serializable {
         String strdate = sdf.format( date );
         return strdate;
     }
-
+    public String getStoreId ( ) {
+        return storeId;
+    }
+    public void setStoreId ( String storeId ) {
+        this.storeId = storeId;
+    }
 }

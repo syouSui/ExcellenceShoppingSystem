@@ -24,9 +24,15 @@ public interface GoodsDao {
 
     public List<Goods> findAllGoods ( int currentPage, int pageSize );
 
+    public int count_findAllGoods ( int pageSize, int currentPage );
+
     public List<Goods> findBy_goodsName ( String goodsName, int currentPage, int pageSize );
 
     public int count_findBy_goodsName(String goodsName);
+
+    public List<Goods> findBy_storeId ( String storeId, int currentPage, int pageSize );
+
+    public int count_findBy_storeId(String storeId);
 
     public List<Goods> findBy_classificationId ( String classificationId, int currentPage, int pageSize );
 

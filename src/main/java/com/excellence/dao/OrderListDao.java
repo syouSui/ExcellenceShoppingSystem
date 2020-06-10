@@ -20,6 +20,15 @@ import java.util.List;
  * modify
  */
 public interface OrderListDao {
+
+    public List<OrderList> findAll ( int currentPage, int pageSize );
+
+    public int count_findAll ( String userName );
+
+    public List<OrderList> findBy_storeId ( String storeId, int currentPage, int pageSize );
+
+    public int count_findBy_storeId ( String userName );
+
     public List<OrderList> findBy_userName ( String userName, int currentPage, int pageSize );
 
     public int count_findBy_userName ( String userName );

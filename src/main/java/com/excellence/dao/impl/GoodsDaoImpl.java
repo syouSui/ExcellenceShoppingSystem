@@ -24,6 +24,7 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
     private String FINDAll = "select * from goods ";
     private String FINDBy_goodsNumber = " and goodsNumber = ? ";
     private String FINDBy_goodsName = " and goodsName like ?";
+    private String FINDBy_storeId = " and storeId = ? ";
     private String FINDBy_classificationId = " and classificationId=? ";
     private String ADD = "insert into goods values(?,?,?,?,?,?,?,?);";
     private String REMOVE = "delete from goods where goodsNumber=?;";
@@ -72,6 +73,22 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         super.closeConnection( conn );
         return list;
     }
+    @Override
+    public int count_findAllGoods ( int pageSize, int currentPage ) {
+        Long count = 0L;
+        Object[] param = new Object[] { };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long) new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    COUNT,
+                    new ArrayHandler( ),
+                    param )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        return count.intValue( );
+    }
 
     @Override
     public List<Goods> findBy_goodsName ( String goodsName, int currentPage, int pageSize ) {
@@ -111,7 +128,43 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         }
         return count.intValue( );
     }
-    ;
+
+    @Override
+    public List<Goods> findBy_storeId ( String storeId, int currentPage, int pageSize ) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
+        List<Goods> list = new ArrayList<>( );
+        Connection conn = super.getConnection( );
+        Object[] param = new Object[] { storeId};
+        try {
+            list = new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    FINDAll + FINDBy_storeId + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
+                    new BeanListHandler<>( Goods.class ),
+                    param
+            );
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return list;
+    }
+
+    @Override
+    public int count_findBy_storeId ( String storeId ) {
+        Long count = 0L;
+        Object[] param = new Object[] { storeId };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long) new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    COUNT + FINDBy_storeId,
+                    new ArrayHandler( ),
+                    param )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        return count.intValue( );
+    }
 
     @Override
     public List<Goods> findBy_classificationId ( String classificationId, int currentPage, int pageSize ) {
@@ -151,7 +204,6 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         }
         return count.intValue( );
     }
-    ;
 
     @Override
     public int addGoods ( Goods goods ) {

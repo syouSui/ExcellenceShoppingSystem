@@ -64,7 +64,8 @@ public class OrderListDaoImplTest {
                 "lux",
                 "lyx",
                 "12314",
-                1 )
+                1,
+                "1" )
         );
 
     }
@@ -83,7 +84,8 @@ public class OrderListDaoImplTest {
                 "lyx_test",
                 "wfu",
                 "18888889999",
-                1 )
+                1,
+                "1" )
         );
     }
 
@@ -101,7 +103,8 @@ public class OrderListDaoImplTest {
                 "lyx_test",
                 "wfu",
                 "-1",
-                1 )
+                1,
+                "1" )
         );
     }
 
