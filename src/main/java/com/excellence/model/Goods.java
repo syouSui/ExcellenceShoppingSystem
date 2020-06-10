@@ -22,7 +22,6 @@ public class Goods {
 
     }
 
-
     public Goods( String goodsNumber, String goodsPictureTop, String classificationId, String goodsName, float priceOrigin, float priceSale, int counter, String goodPicture, String storeId) {
         this.goodsNumber = goodsNumber;
         this.goodsPictureTop = goodsPictureTop;

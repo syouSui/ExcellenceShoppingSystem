@@ -41,9 +41,9 @@ public class LoginAndRegisterService {
                         "",
                         ""
                 )
-        )==1 )
+        )!=1 )
             response.getWriter( ).println( new ResultVo( ResultVo.CODE_FAILED, "failed", null ).toJSON( ) );
-        else response.getWriter( ).println( new ResultVo( ResultVo.CODE_SUCCESS, "success", null ).toJSON( ) );
+        else response.getWriter( ).println( new ResultVo( ResultVo.CODE_SUCCESS, "success", 1 ).toJSON( ) );
         System.out.println( "login" );
     }
 

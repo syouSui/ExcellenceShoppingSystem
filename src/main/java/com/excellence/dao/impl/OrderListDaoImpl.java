@@ -24,6 +24,8 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     private String selectSQL= "select * from order_list where 1=1 ";
     private String countSQL = "select count(*) from order_list where 1=1 ";
     private String select_userName = "and userName = ? ";
+    private String select_storeId = "and storeId = ? ";
+    private String select_orderId = "and orderId = ? ";
     private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?,?)";
     private String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
     private String modifySQL = "update order_list set counter = ?,relativeName = ?, address = ?, relativePhone = ?, orderStatus = ? where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
@@ -31,23 +33,120 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     final private int default_pageSize = 10;
 
     @Override
-    public List<OrderList> findAll ( int currentPage, int pageSize ) {
-        return null;
+    public List<OrderList> findBy_orderId(String orderId, int currentPage, int pageSize) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
+        List<OrderList> orderLists =new ArrayList<>();
+        Connection conn = super.getConnection();
+        Object[] param = new Object[]{ orderId };
+        try {
+            orderLists = new QueryRunner(super.getDataSource()).query(
+                    conn,
+                    selectSQL+ select_orderId + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
+                    new BeanListHandler<>(OrderList.class),
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( conn );
+        return orderLists;
     }
 
     @Override
-    public int count_findAll ( String userName ) {
-        return 0;
+    public int count_findBy_orderId(String orderId) {
+        Long count = 0L;
+        Object[] param = new Object[] { orderId };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long)new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    countSQL+ select_orderId,
+                    new ArrayHandler( ),
+                    param
+            )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return count.intValue();
     }
 
     @Override
-    public List<OrderList> findBy_storeId ( String storeId, int currentPage, int pageSize ) {
-        return null;
+    public List<OrderList> findAll(int currentPage, int pageSize) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
+        List<OrderList> orderLists =new ArrayList<>();
+        Connection conn = super.getConnection();
+        Object[] param = new Object[]{ };
+        try {
+            orderLists = new QueryRunner(super.getDataSource()).query(
+                    conn,
+                    selectSQL + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
+                    new BeanListHandler<>(OrderList.class),
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( conn );
+        return orderLists;
     }
 
     @Override
-    public int count_findBy_storeId ( String userName ) {
-        return 0;
+    public int count_findAll() {
+        Long count = 0L;
+        Object[] param = new Object[] {  };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long)new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    countSQL,
+                    new ArrayHandler( ),
+                    param
+            )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return count.intValue();
+    }
+
+    @Override
+    public List<OrderList> findBy_storeId(String storeId, int currentPage, int pageSize) {
+        pageSize = pageSize == -1 ? default_pageSize : pageSize;
+        List<OrderList> orderLists =new ArrayList<>();
+        Connection conn = super.getConnection();
+        Object[] param = new Object[]{ storeId };
+        try {
+            orderLists = new QueryRunner(super.getDataSource()).query(
+                    conn,
+                    selectSQL+ select_storeId + " limit " + (currentPage - 1) * pageSize + ", " + pageSize,
+                    new BeanListHandler<>(OrderList.class),
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( conn );
+        return orderLists;
+    }
+
+    @Override
+    public int count_findBy_storeId(String storeId) {
+        Long count = 0L;
+        Object[] param = new Object[] { storeId };
+        Connection conn = super.getConnection( );
+        try {
+            count = (Long)new QueryRunner( super.getDataSource( ) ).query(
+                    conn,
+                    countSQL+ select_storeId,
+                    new ArrayHandler( ),
+                    param
+            )[0];
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace( );
+        }
+        super.closeConnection( conn );
+        return count.intValue();
     }
 
     @Override

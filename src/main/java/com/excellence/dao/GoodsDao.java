@@ -42,6 +42,6 @@ public interface GoodsDao {
 
     public int removeGoods ( String goodsNumber );
 
-    public int modifyGoods ( Goods goods, String goodsName );
+    public int modifyGoods ( Goods goods, String goodsNumber );
 
 }

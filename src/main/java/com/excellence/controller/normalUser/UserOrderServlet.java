@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
  * @createTime 2020-06-10 14:33:00 星期三
  * @Description TODO
  */
-@WebServlet ( name = "UserOrderServlet " )
+@WebServlet ( "/UserOrderServlet " )
 public class UserOrderServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );
