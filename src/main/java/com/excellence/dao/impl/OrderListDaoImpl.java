@@ -29,6 +29,7 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?,?)";
     private String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
     private String modifySQL = "update order_list set counter = ?,relativeName = ?, address = ?, relativePhone = ?, orderStatus = ? where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
+    private String modifySQL_orderStatus = "update set orderStatus = ? where orderId = ? ";
 
     final private int default_pageSize = 10;
 
@@ -266,6 +267,28 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
         }
         super.closeConnection( conn );
         return count;
+    }
+
+    @Override
+    public int modify_orderStatus_By_orderId(String orderId,int orderStatus) {
+        int countModify = 0;
+        int countFind = count_findBy_orderId(orderId);
+        Connection conn = super.getConnection();
+        Object[] param = new Object[]{
+                orderStatus,
+                orderId
+        };
+        try {
+            countModify = new QueryRunner(super.getDataSource()).update(
+                    conn,
+                    modifySQL_orderStatus,
+                    param
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        super.closeConnection( conn );
+        return (countModify == countFind && countModify != 0)?1 : 0;
     }
 
 }

@@ -21,7 +21,7 @@ import java.util.List;
  * @Description TODO
  */
 public class UserDaoImpl extends C3P0Utils implements UserDao {
-    private String selectSQL = "select userName, userNickname, role, phone, userEmail, userPicture ";
+    private String selectSQL = "select userName, userNickname, role, phone, userEmail, userPicture from user where 1=1 ";
     private String countSQL = "select count(*) from user where 1=1 ";
     private String select_userName = "and userName = ? ";
     private String select_userEmail = "and userEmail = ? ";

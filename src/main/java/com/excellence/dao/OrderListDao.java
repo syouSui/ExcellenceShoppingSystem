@@ -42,4 +42,6 @@ public interface OrderListDao {
 
     public int modify ( OrderList orderList );
 
+    public int modify_orderStatus_By_orderId (String orderId,int orderStatus);
+
 }

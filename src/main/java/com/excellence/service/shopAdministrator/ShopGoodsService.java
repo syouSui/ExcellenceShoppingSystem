@@ -17,7 +17,7 @@ import java.io.IOException;
  * @createTime 2020-06-10 17:18:00 星期三
  * @Description TODO
  */
-public class EditGoodsService {
+public class ShopGoodsService {
     static GoodsDao goodsDao = new GoodsDaoImpl( );
 
     public void addGoods ( HttpServletRequest request, HttpServletResponse response ) throws IOException {

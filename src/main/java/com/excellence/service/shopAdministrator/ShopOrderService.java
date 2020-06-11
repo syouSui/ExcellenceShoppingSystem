@@ -54,7 +54,7 @@ public class ShopOrderService {
                         request.getParameter("relativePhone"),
                         Integer.parseInt(request.getParameter("orderStatus")),
                         request.getParameter("storeId")
-                )) == 0 ){
+                )) != 1 ){
             response.getWriter().println(
                     new ResultVo(
                             ResultVo.CODE_FAILED,
@@ -85,20 +85,20 @@ public class ShopOrderService {
                 null
           );
           orderList.setOrderDate(request.getParameter("orderDate"));
-        if(orderListDao.remove(orderList) == 1){
+        if(orderListDao.remove(orderList) != 1){
             response.getWriter().println(
                     new ResultVo(
-                            ResultVo.CODE_SUCCESS,
-                            "success",
+                            ResultVo.CODE_FAILED,
+                            "failed",
                             null
                     )
             );
         }else{
             response.getWriter().println(
                     new ResultVo(
-                    ResultVo.CODE_FAILED,
-                    "failed",
-                    null
+                            ResultVo.CODE_SUCCESS,
+                            "success",
+                            null
             ));
         }
     }

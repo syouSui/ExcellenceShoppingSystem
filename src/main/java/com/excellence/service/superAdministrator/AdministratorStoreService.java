@@ -1,4 +1,4 @@
-package com.excellence.service.shopAdministrator;
+package com.excellence.service.superAdministrator;
 
 import com.excellence.dao.StoreDao;
 import com.excellence.dao.impl.StoreDaoImpl;
@@ -9,21 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @author acmaker & kaffu chino
- * @version 1.0.0
- * @ClassName AddStop.java
- * @PackageLoaction com.excellence.service.shopAdministrator
- * @createTime 2020-06-10 14:27:00 星期三
- * @Description TODO
- */
-public class EditShopService {
+public class AdministratorStoreService {
     StoreDao storeDao =  new StoreDaoImpl();
+
     public void modifyStore (HttpServletRequest request, HttpServletResponse response)throws IOException {
-        if(storeDao.modifyStore(
-                request.getParameter("storeId"),
+        if(storeDao.removeStore(request.getParameter("storeId")) != 1){
+            response.getWriter().println(
+                    new ResultVo(
+                            ResultVo.CODE_FAILED,
+                            "failed",
+                            null
+                    ));
+        }else{
+            response.getWriter().println(
+                    new ResultVo(
+                            ResultVo.CODE_SUCCESS,
+                            "success",
+                            null
+                    ));
+        }
+    }
+    public void addStore(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        if(storeDao.addStore(
                 new Store(
-                        null,
+                        request.getParameter("storeId"),
                         request.getParameter("storeName"),
                         request.getParameter("storePicture"),
                         request.getParameter("storeDescription"),

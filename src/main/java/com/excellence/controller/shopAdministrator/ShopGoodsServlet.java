@@ -1,6 +1,6 @@
-package com.excellence.controller.normalUser;
+package com.excellence.controller.shopAdministrator;
 
-import com.excellence.service.normalUser.UserOrderService;
+import com.excellence.service.shopAdministrator.ShopGoodsService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,18 +14,17 @@ import java.lang.reflect.Method;
 /********************************************************************************
  ** Project Name: ExcellenceShoppingSystem
  ** Author： Kaffu Chino
- ** Date： 2020/6/11 0:05
+ ** Date： 2020/6/11 0:15
  ** LastEditors: Kaffu Chino
  ** Description： 
  *********************************************************************************/
-
-@WebServlet ( name = "UserOrderServlet", urlPatterns = "UserOrderServlet" )
-public class UserOrderServlet extends HttpServlet {
-    protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+@WebServlet(name = "ShopGoodsServlet", urlPatterns="/ShopGoodsServlet")
+public class ShopGoodsServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );
         try {
-            Method method = UserOrderService.class.getMethod( str_method, HttpServletRequest.class, HttpServletResponse.class );
-            method.invoke( new UserOrderService( ), request, response );
+            Method method = ShopGoodsService.class.getMethod( str_method, HttpServletRequest.class, HttpServletResponse.class );
+            method.invoke( new ShopGoodsService( ), request, response );
         } catch ( NoSuchMethodException e ) {
             e.printStackTrace( );
         } catch ( IllegalAccessException e ) {
@@ -35,7 +34,7 @@ public class UserOrderServlet extends HttpServlet {
         }
     }
 
-    protected void doGet ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        doPost( request, response );
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

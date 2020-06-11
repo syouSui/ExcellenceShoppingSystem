@@ -21,6 +21,7 @@ import java.io.IOException;
 public class SuperAdministratorService {
     static UserDao userDao = new UserDaoImpl( );
     static StoreDao storeDao = new StoreDaoImpl( );
+
     public void findUser ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         if ( request.getParameter( "userName" ) == null )
             response.getWriter( ).println(
@@ -35,10 +36,11 @@ public class SuperAdministratorService {
                     new ResultVo(
                             ResultVo.CODE_SUCCESS,
                             "success",
-                            userDao.findBy_userEmail( request.getParameter( "userName" ) )
+                            userDao.findBy_userName( request.getParameter( "userName" ) )
                     ).toJSON( )
             );
     }
+
     public void findAllUser ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         response.getWriter( ).println(
                 new ResultVo(
@@ -51,22 +53,35 @@ public class SuperAdministratorService {
                 ).toJSON( )
         );
     }
+
+    public void count_findAllUser ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
+        response.getWriter( ).println(
+                new ResultVo(
+                        ResultVo.CODE_SUCCESS,
+                        "success",
+                        userDao.count_findAllUser( )
+                ).toJSON( )
+        );
+    }
+
     public void removeUser ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
-        response.getWriter( ).println(
-                new ResultVo(
-                        ResultVo.CODE_SUCCESS,
-                        "success",
-                        userDao.removeUser( request.getParameter( "userName" ) )
-                ).toJSON( )
-        );
+        if ( userDao.removeUser( request.getParameter( "userName" ) ) != 1 ) {
+            response.getWriter( ).println(
+                    new ResultVo(
+                            ResultVo.CODE_FAILED,
+                            "failed",
+                            null
+                    ).toJSON( )
+            );
+        } else {
+            response.getWriter( ).println(
+                    new ResultVo(
+                            ResultVo.CODE_SUCCESS,
+                            "success",
+                            null
+                    ).toJSON( )
+            );
+        }
     }
-    public void removeStore ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
-        response.getWriter( ).println(
-                new ResultVo(
-                        ResultVo.CODE_SUCCESS,
-                        "success",
-                        storeDao.removeStore( request.getParameter( "storeId" ) )
-                ).toJSON( )
-        );
-    }
+
 }

@@ -21,7 +21,7 @@ import java.util.List;
  * @Description TODO
  */
 public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsDao {
-    private String FINDAll = "select * from goods ";
+    private String FINDAll = "select * from goods where 1= 1 ";
     private String FINDBy_goodsNumber = " and goodsNumber = ? ";
     private String FINDBy_goodsName = " and goodsName like ?";
     private String FINDBy_storeId = " and storeId = ? ";
@@ -74,7 +74,7 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
         return list;
     }
     @Override
-    public int count_findAllGoods ( int pageSize, int currentPage ) {
+    public int count_findAllGoods (  ) {
         Long count = 0L;
         Object[] param = new Object[] { };
         Connection conn = super.getConnection( );

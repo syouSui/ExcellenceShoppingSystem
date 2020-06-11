@@ -1,6 +1,5 @@
 package com.excellence.controller.shopAdministrator;
 
-import com.excellence.service.normalUser.FindShopService;
 import com.excellence.service.shopAdministrator.ShopOrderService;
 
 import javax.servlet.ServletException;
@@ -20,7 +19,7 @@ import java.lang.reflect.Method;
  * @createTime 2020-06-10 14:33:00 星期三
  * @Description TODO
  */
-@WebServlet ( "/ShopOrderServlet" )
+@WebServlet ( name="ShopOrderServlet", urlPatterns="/ShopOrderServlet" )
 public class ShopOrderServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );
