@@ -12,6 +12,7 @@
 
 [ESS【ExcellenceShoppingSystem】 http://www.docway.net/project/1VSeaRPoiuX/share/1VtYqhDYSwa](http://www.docway.net/project/1VSeaRPoiuX/share/1VtYqhDYSwa)
 
+接口测试如图：
 ![](https://image--bed.oss-cn-qingdao.aliyuncs.com/image--bed--PicGo/20200612020900.png?x-oss-process=image)
 
 
@@ -39,6 +40,7 @@
 
 ## 数据库设计
 
+如图：
 ![](https://image--bed.oss-cn-qingdao.aliyuncs.com/image--bed--PicGo/20200611223208.png?x-oss-process=image)
 
 ## 演示地址
