@@ -5,7 +5,7 @@
 
 ## 简介
 
-一个前后端分离的购物网站系统后台, 前端采用原生三件套开发, 后端采用MVC分层架构。
+一个前后端分离的购物网站系统后台, 前端采用vue+elementUI开发, 后端采用MVC分层架构。
 
 
 接口文档详见
@@ -27,12 +27,12 @@
 + ...
 
 ### 后端
-+ 使用 maven 管理依赖
-+ 采用 spring-bean BeanUtils 简化对象封装
-+ 采用 Jackson 解析与生成 json
++ maven 管理依赖
++ spring-bean BeanUtils 简化对象封装
++ Jackson 解析与生成 json
 + 数据库访问层采用 Apache DbUtils
 + redis 作为数据库中间缓存( 待实现 )
-+ c3p0 作为数据库连接池
++ c3p0 作为数据库连接池，优化访问
 + junit 单元测试
 + ...
 
@@ -41,4 +41,13 @@
 ![](https://image--bed.oss-cn-qingdao.aliyuncs.com/image--bed--PicGo/20200611223208.png?x-oss-process=image)
 
 ## 演示地址
-待上传！
+前端演示地址待上传！
+
+所有文档所有接口全部调试测试成功，已经部署于两台服务器，域名如下。
+
+按照接口文档，模拟post请求可以接收数据。
+
+http://ess.cafu-chino.top
+
+http://ess.acmaker.vip
+
