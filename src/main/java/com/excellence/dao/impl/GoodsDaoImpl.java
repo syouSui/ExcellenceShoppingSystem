@@ -1,7 +1,7 @@
 package com.excellence.dao.impl;
 
 import com.excellence.model.Goods;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -20,15 +20,15 @@ import java.util.List;
  * @createTime 2020-05-20 19:05:00 星期三
  * @Description TODO
  */
-public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsDao {
+public class GoodsDaoImpl extends C3P0Util implements com.excellence.dao.GoodsDao {
     private String FINDAll = "select * from goods where 1= 1 ";
     private String FINDBy_goodsNumber = " and goodsNumber = ? ";
     private String FINDBy_goodsName = " and goodsName like ?";
     private String FINDBy_storeId = " and storeId = ? ";
     private String FINDBy_classificationId = " and classificationId=? ";
-    private String ADD = "insert into goods values(?,?,?,?,?,?,?,?);";
+    private String ADD = "insert into goods values(?,?,?,?,?,?,?,?,?);";
     private String REMOVE = "delete from goods where goodsNumber=?;";
-    private String MODIFY = "update goods as g set g.goodsPictureTop=?, g.goodsClassification=?, g.goodsName=?, g.priceOrigin=?, g.priceSale=?, g.counter=?, g.goodsPicture=? where g.goodsNumber=?;";
+    private String MODIFY = "update goods as g set g.goodsPictureTop=?, g.classificationId=?, g.goodsName=?, g.priceOrigin=?, g.priceSale=?, g.counter=?, g.goodsPicture=? where g.goodsNumber=?;";
     private String COUNT = "select count(*) from goods where 1=1 ";
 
     final private int default_pageSize = 10;
@@ -216,7 +216,8 @@ public class GoodsDaoImpl extends C3P0Utils implements com.excellence.dao.GoodsD
                 goods.getPriceOrigin( ) + "",
                 goods.getPriceSale( ) + "",
                 goods.getCounter( ) + "",
-                goods.getGoodPicture( )
+                goods.getGoodPicture( ),
+                goods.getStoreId()
         };
         int count = 0;
         try {

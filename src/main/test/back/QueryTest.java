@@ -1,13 +1,9 @@
 package back;
 
-import com.excellence.model.User;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 
 /**
@@ -19,7 +15,7 @@ import java.util.List;
  * @Description TODO
  */
 public class QueryTest {
-    private static QueryRunner queryRunner = new QueryRunner( C3P0Utils.getDataSource( ) );
+    private static QueryRunner queryRunner = new QueryRunner( C3P0Util.getDataSource( ) );
 
     public static void main ( String[] args ) throws SQLException {
 //            String sql = "select * from user;";

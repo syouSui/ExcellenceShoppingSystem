@@ -2,7 +2,7 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.UserDao;
 import com.excellence.model.User;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -20,7 +20,7 @@ import java.util.List;
  * @createTime 2020-05-20 18:22:00 星期三
  * @Description TODO
  */
-public class UserDaoImpl extends C3P0Utils implements UserDao {
+public class UserDaoImpl extends C3P0Util implements UserDao {
     private String selectSQL = "select userName, userNickname, role, phone, userEmail, userPicture from user where 1=1 ";
     private String countSQL = "select count(*) from user where 1=1 ";
     private String select_userName = "and userName = ? ";

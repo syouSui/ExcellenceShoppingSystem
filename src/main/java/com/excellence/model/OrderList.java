@@ -13,6 +13,11 @@ import java.util.Date;
  *********************************************************************************/
 
 public class OrderList implements Serializable {
+    public static final int ORDER_SUCCESS = 0;
+    public static final int ORDER_FAILED = 1;
+    public static final int ORDER_CANCEL = 2;
+    public static final int ORDER_NOTPAID = 3;
+
     private String orderId;
     private String orderDate;
     private String userName;

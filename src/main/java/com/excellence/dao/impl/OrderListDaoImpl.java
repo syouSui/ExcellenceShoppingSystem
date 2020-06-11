@@ -2,7 +2,7 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.OrderListDao;
 import com.excellence.model.OrderList;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -20,7 +20,7 @@ import java.util.List;
  * @createTime 2020-05-20 19:07:00 星期三
  * @Description TODO
  */
-public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
+public class OrderListDaoImpl extends C3P0Util implements OrderListDao {
     private String selectSQL= "select * from order_list where 1=1 ";
     private String countSQL = "select count(*) from order_list where 1=1 ";
     private String select_userName = "and userName = ? ";
@@ -29,7 +29,7 @@ public class OrderListDaoImpl extends C3P0Utils implements OrderListDao {
     private String insertSQL = "insert into order_list values(?,?,?,?,?,?,?,?,?,?)";
     private String removeSQL = "delete from order_list where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
     private String modifySQL = "update order_list set counter = ?,relativeName = ?, address = ?, relativePhone = ?, orderStatus = ? where orderId = ? and orderDate = ? and userName = ? and goodsNumber = ? ";
-    private String modifySQL_orderStatus = "update set orderStatus = ? where orderId = ? ";
+    private String modifySQL_orderStatus = "update order_list set orderStatus = ? where orderId = ? ";
 
     final private int default_pageSize = 10;
 

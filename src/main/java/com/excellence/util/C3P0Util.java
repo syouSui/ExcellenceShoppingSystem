@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @createTime 2020-05-25 17:13:00 星期一
  * @Description TODO
  */
-public class C3P0Utils {
+public class C3P0Util {
     private static ComboPooledDataSource ds = new ComboPooledDataSource( "mysql" );
 
     public static DataSource getDataSource ( ) {

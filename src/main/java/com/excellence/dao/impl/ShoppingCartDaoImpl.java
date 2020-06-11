@@ -2,14 +2,13 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.ShoppingCartDao;
 import com.excellence.model.ShoppingCart;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,13 +19,13 @@ import java.util.List;
  * @createTime 2020-05-20 19:08:00 星期三
  * @Description TODO
  */
-public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
+public class ShoppingCartDaoImpl extends C3P0Util implements ShoppingCartDao {
     private String selectSQL = "select * from shopping_cart where 1=1 ";
     private String countSQL = "select count(*) from shopping_cart where 1=1 ";
     private String select_userName = "and userName = ? ";
     private String select_goodsNumber = "and goodsNumber=? ";
     private String insertSQL = "insert into shopping_cart values(?,?,?)";
-    private String removeSQL = "delete from shopping_cart where userName = ? and goodsNumber = ? and counter = ?";
+    private String removeSQL = "delete from shopping_cart where userName = ? and goodsNumber = ? ";
     private String modifySQL = "update shopping_cart set counter = ? where userName = ? and goodsNumber = ? ";
     private String addSQL = "update shopping_cart set counter = counter+? where userName = ? and goodsNumber = ? ";
 
@@ -131,7 +130,6 @@ public class ShoppingCartDaoImpl extends C3P0Utils implements ShoppingCartDao {
         Object[] param = new Object[] {
                 shoppingCart.getUserName( ),
                 shoppingCart.getGoodsNumber( ),
-                shoppingCart.getCounter( ) + "",
         };
         try {
             count = new QueryRunner( super.getDataSource( ) ).update(

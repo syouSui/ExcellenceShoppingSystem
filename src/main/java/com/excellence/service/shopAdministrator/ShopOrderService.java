@@ -18,88 +18,59 @@ import java.io.IOException;
  * @Description TODO
  */
 public class ShopOrderService {
-    OrderListDao orderListDao =  new OrderListDaoImpl();
-    public void findBy_storeId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    OrderListDao orderListDao = new OrderListDaoImpl( );
+    public void findBy_storeId ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         response.getWriter( ).println(
                 new ResultVo(
                         ResultVo.CODE_SUCCESS,
                         "success",
                         orderListDao.findBy_storeId(
-                                request.getParameter("storeId"),
+                                request.getParameter( "storeId" ),
                                 Integer.parseInt( request.getParameter( "currentPage" ) ),
                                 Integer.parseInt( request.getParameter( "pageSize" ) )
                         )
                 ).toJSON( )
         );
     }
-    public void count_findBy_storeId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void count_findBy_storeId ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         response.getWriter( ).println(
                 new ResultVo(
                         ResultVo.CODE_SUCCESS,
                         "success",
-                        orderListDao.count_findBy_storeId(request.getParameter("storeId"))
-                        ).toJSON( )
-                );
+                        orderListDao.count_findBy_storeId( request.getParameter( "storeId" ) )
+                ).toJSON( )
+        );
     }
 
-    public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if (orderListDao.add(
-                new OrderList(
-                        request.getParameter("orderId"),
-                        request.getParameter("userName"),
-                        request.getParameter("goodsNumber"),
-                        Integer.parseInt(request.getParameter("counter")),
-                        request.getParameter("relativeName"),
-                        request.getParameter("address"),
-                        request.getParameter("relativePhone"),
-                        Integer.parseInt(request.getParameter("orderStatus")),
-                        request.getParameter("storeId")
-                )) != 1 ){
-            response.getWriter().println(
-                    new ResultVo(
-                            ResultVo.CODE_FAILED,
-                            "failed",
-                            null
-                    )
-            );
-        }else{
-            response.getWriter().println(
-                new ResultVo(
-                        ResultVo.CODE_SUCCESS,
-                        "success",
-                        null
-                )
-            );
-        }
-    }
-    public void remove(HttpServletRequest request, HttpServletResponse response)throws IOException {
-          OrderList orderList =  new OrderList(
-                request.getParameter("orderId"),
-                request.getParameter("userName"),
-                request.getParameter("goodsNumber"),
-                Integer.parseInt(null),
+    public void remove ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
+        OrderList orderList = new OrderList(
+                request.getParameter( "orderId" ),
+                request.getParameter( "userName" ),
+                request.getParameter( "goodsNumber" ),
+                0,
                 null,
                 null,
                 null,
-                Integer.parseInt(null),
+                0,
                 null
-          );
-          orderList.setOrderDate(request.getParameter("orderDate"));
-        if(orderListDao.remove(orderList) != 1){
-            response.getWriter().println(
+        );
+        orderList.setOrderDate( request.getParameter( "orderDate" ) );
+        if ( orderListDao.remove( orderList ) != 1 ) {
+            response.getWriter( ).println(
                     new ResultVo(
                             ResultVo.CODE_FAILED,
                             "failed",
                             null
-                    )
+                    ).toJSON( )
             );
-        }else{
-            response.getWriter().println(
+        } else {
+            response.getWriter( ).println(
                     new ResultVo(
                             ResultVo.CODE_SUCCESS,
                             "success",
                             null
-            ));
+                    ).toJSON( )
+            );
         }
     }
 }

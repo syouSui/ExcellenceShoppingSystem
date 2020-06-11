@@ -10,13 +10,20 @@
 
 接口文档详见
 
-[http://www.docway.net/project/1VSeaRPoiuX/1VSmRVog90i](http://www.docway.net/project/1VSeaRPoiuX/1VSmRVog90i)
+[ESS【ExcellenceShoppingSystem】 http://www.docway.net/project/1VSeaRPoiuX/share/1VtYqhDYSwa](http://www.docway.net/project/1VSeaRPoiuX/share/1VtYqhDYSwa)
+
 
 
 ## 技术栈
 ### 前端
++ vue.js
++ elementUI
 + jquery
++ bootstrap
 + echarts绘图
++ easy-pie-chart
++ dynamic-table
++ external-dragging-calendar
 + ...
 
 ### 后端
@@ -24,13 +31,14 @@
 + 采用 spring-bean BeanUtils 简化对象封装
 + 采用 Jackson 解析与生成 json
 + 数据库访问层采用 Apache DbUtils
-+ redis 作为数据库中间缓存
++ redis 作为数据库中间缓存( 待实现 )
 + c3p0 作为数据库连接池
++ junit 单元测试
 + ...
 
 ## 数据库设计
 
-![](https://drive.cafu-chino.top/?/images/2020/05/27/DKh2nsEPVR/%E6%89%B9%E6%B3%A8%202020-05-27%20201318.png)
+![](https://image--bed.oss-cn-qingdao.aliyuncs.com/image--bed--PicGo/20200611223208.png?x-oss-process=image)
 
 ## 演示地址
 待上传！

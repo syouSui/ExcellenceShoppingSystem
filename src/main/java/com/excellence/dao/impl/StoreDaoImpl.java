@@ -2,8 +2,7 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.StoreDao;
 import com.excellence.model.Store;
-import com.excellence.model.User;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -21,7 +20,7 @@ import java.util.List;
  * @createTime 2020-06-03 18:19:00 星期三
  * @Description TODO
  */
-public class StoreDaoImpl extends C3P0Utils implements StoreDao {
+public class StoreDaoImpl extends C3P0Util implements StoreDao {
     private String selectSQL = "select * from store where 1=1 ";
     private String selectBy_storeName = " and storeName like ? ";
     private String selectBy_storeId = " and storeId=? ";

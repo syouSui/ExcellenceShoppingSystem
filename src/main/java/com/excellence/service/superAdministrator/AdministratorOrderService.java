@@ -17,8 +17,8 @@ import java.io.IOException;
  * @Description TODO
  */
 public class AdministratorOrderService {
-    OrderListDao orderListDao =  new OrderListDaoImpl();
-    public void findAll(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    OrderListDao orderListDao = new OrderListDaoImpl( );
+    public void findAll ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         response.getWriter( ).println(
                 new ResultVo(
                         ResultVo.CODE_SUCCESS,
@@ -30,14 +30,13 @@ public class AdministratorOrderService {
                 ).toJSON( )
         );
     }
-    public void count_findAll(HttpServletRequest request,HttpServletResponse response)throws IOException{
+    public void count_findAll ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         response.getWriter( ).println(
                 new ResultVo(
                         ResultVo.CODE_SUCCESS,
                         "success",
-                        orderListDao.count_findAll()
-                        )
-                .toJSON()
+                        orderListDao.count_findAll( )
+                ) .toJSON( )
         );
     }
 }

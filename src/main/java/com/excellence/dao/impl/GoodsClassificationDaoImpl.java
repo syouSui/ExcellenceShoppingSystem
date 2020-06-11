@@ -2,7 +2,7 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.GoodsClassificationDao;
 import com.excellence.model.GoodsClassification;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -21,7 +21,7 @@ import java.util.List;
  * @createTime 2020-05-20 19:05:00 星期三
  * @Description TODO
  */
-public class GoodsClassificationDaoImpl extends C3P0Utils implements GoodsClassificationDao {
+public class GoodsClassificationDaoImpl extends C3P0Util implements GoodsClassificationDao {
     private String FIND = "select * from goods_classification where 1=1 ";
     private String FINDBy_goodsClassification = " and classificationId=? ";
     private String FINDBy_classificationName = " and classificationName like ? ";

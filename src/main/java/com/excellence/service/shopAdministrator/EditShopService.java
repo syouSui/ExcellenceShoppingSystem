@@ -18,31 +18,33 @@ import java.io.IOException;
  * @Description TODO
  */
 public class EditShopService {
-    StoreDao storeDao =  new StoreDaoImpl();
-    public void modifyStore (HttpServletRequest request, HttpServletResponse response)throws IOException {
-        if(storeDao.modifyStore(
-                request.getParameter("storeId"),
+    StoreDao storeDao = new StoreDaoImpl( );
+    public void modifyStore ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
+        if ( storeDao.modifyStore(
+                request.getParameter( "storeId" ),
                 new Store(
                         null,
-                        request.getParameter("storeName"),
-                        request.getParameter("storePicture"),
-                        request.getParameter("storeDescription"),
-                        request.getParameter("userName")
+                        request.getParameter( "storeName" ),
+                        request.getParameter( "storePicture" ),
+                        request.getParameter( "storeDescription" ),
+                        request.getParameter( "userName" )
                 )
-        ) != 1){
-            response.getWriter().println(
+        ) != 1 ) {
+            response.getWriter( ).println(
                     new ResultVo(
                             ResultVo.CODE_FAILED,
                             "failed",
                             null
-                    ));
-        }else{
-            response.getWriter().println(
+                    ).toJSON( )
+            );
+        } else {
+            response.getWriter( ).println(
                     new ResultVo(
                             ResultVo.CODE_SUCCESS,
                             "success",
                             null
-                    ));
+                    ).toJSON( )
+            );
         }
     }
 }

@@ -2,7 +2,7 @@ package com.excellence.dao.impl;
 
 import com.excellence.dao.HeadPictureDao;
 import com.excellence.model.HeadPicture;
-import com.excellence.util.C3P0Utils;
+import com.excellence.util.C3P0Util;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * @createTime 2020-05-20 19:06:00 星期三
  * @Description TODO
  */
-public class HeadPictureDaoImpl extends C3P0Utils implements HeadPictureDao {
+public class HeadPictureDaoImpl extends C3P0Util implements HeadPictureDao {
     private String FIND = "select * from head_picture;";
     private String ADD = "insert into head_picture values(?);";
     private String REMOVE = "delete from head_picture where pictureAddress=?;";

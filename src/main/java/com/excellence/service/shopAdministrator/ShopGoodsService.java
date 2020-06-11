@@ -3,6 +3,7 @@ package com.excellence.service.shopAdministrator;
 import com.excellence.dao.GoodsDao;
 import com.excellence.dao.impl.GoodsDaoImpl;
 import com.excellence.model.Goods;
+import com.excellence.util.RandomUtil;
 import com.excellence.util.ResultVo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class ShopGoodsService {
     public void addGoods ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         if ( goodsDao.addGoods(
                 new Goods(
-                        request.getParameter( "goodsNumber" ),
+                        RandomUtil.getUniqueId( 25 ),
                         request.getParameter( "goodsPictureTop" ),
                         request.getParameter( "classificationId" ),
                         request.getParameter( "goodsName" ),
