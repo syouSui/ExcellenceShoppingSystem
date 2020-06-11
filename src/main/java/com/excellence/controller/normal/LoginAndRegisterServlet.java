@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  * @createTime 2020-06-09 15:04:00 星期二
  * @Description TODO
  */
-@WebServlet ("/LoginAndRegisterServlet" )
+@WebServlet ( name = "LoginAndRegisterServlet", urlPatterns = { "/LoginAndRegisterServlet" } )
 public class LoginAndRegisterServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );
@@ -36,6 +36,6 @@ public class LoginAndRegisterServlet extends HttpServlet {
     }
 
     protected void doGet ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        doPost(request,response);
+        doPost( request, response );
     }
 }

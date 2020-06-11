@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  * @createTime 2020-06-09 15:13:00 星期二
  * @Description TODO
  */
-@WebServlet ( name = "SuperAdministratorServlet", urlPatterns = "/SuperAdministratorServlet" )
+@WebServlet ( name = "SuperAdministratorServlet", urlPatterns = {"/SuperAdministratorServlet"} )
 public class SuperAdministratorServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );

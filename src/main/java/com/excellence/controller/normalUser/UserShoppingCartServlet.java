@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  ** LastEditors: Kaffu Chino
  ** Description： 
  *********************************************************************************/
-@WebServlet ( name = "UserShoppingCartServlet", urlPatterns = "UserShoppingCartServlet" )
+@WebServlet ( name = "UserShoppingCartServlet", urlPatterns = { "/UserShoppingCartServlet" } )
 public class UserShoppingCartServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );

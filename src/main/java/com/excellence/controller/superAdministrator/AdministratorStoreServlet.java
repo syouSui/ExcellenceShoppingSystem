@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  ** LastEditors: Kaffu Chino
  ** Description： 
  *********************************************************************************/
-@WebServlet ( name = "AdministratorStoreServlet", urlPatterns = "/AdministratorStoreServlet" )
+@WebServlet ( name = "AdministratorStoreServlet", urlPatterns = {"/AdministratorStoreServlet"} )
 public class AdministratorStoreServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );

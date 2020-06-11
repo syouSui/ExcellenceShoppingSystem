@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  ** Description： 
  *********************************************************************************/
 
-@WebServlet ( name = "UserOrderServlet", urlPatterns = "UserOrderServlet" )
+@WebServlet ( name = "UserOrderServlet", urlPatterns = { "/UserOrderServlet" } )
 public class UserOrderServlet extends HttpServlet {
     protected void doPost ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         String str_method = request.getParameter( "method" );
