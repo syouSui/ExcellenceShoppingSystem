@@ -51,7 +51,7 @@ public class LoginAndRegisterService {
 
     public void register ( HttpServletRequest request, HttpServletResponse response ) throws IOException {
         String role = request.getParameter( "role" );
-        if ( "0".equals( role ) == false || "1".equals( role ) == false ) {
+        if ( "0".equals( role ) == false && "1".equals( role ) == false ) {
             role = "0";
         }
         if ( userDao.addUser(
