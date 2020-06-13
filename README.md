@@ -41,7 +41,7 @@
 ## 数据库设计
 
 如图：
-![](https://image--bed.oss-cn-qingdao.aliyuncs.com/image--bed--PicGo/20200611223208.png?x-oss-process=image)
+![](https://image--bed.oss-cn-qingdao.aliyuncs.com/image--bed--PicGo/20200613113632.png?x-oss-process=image)
 
 ## 演示地址
 前端演示地址待上传！
